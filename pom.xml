@@ -982,6 +982,13 @@
 			<roles><role>Project lead</role></roles>
 			<timezone>+8</timezone>
 		</developer>
+		<developer>
+			<id>fengyunhe</id>
+			<name>Yangyan</name>
+			<email>277160299@qq.com</email>
+			<roles><role>Developer</role></roles>
+			<timezone>+8</timezone>
+		</developer>
 	</developers>
 	
 </project>
