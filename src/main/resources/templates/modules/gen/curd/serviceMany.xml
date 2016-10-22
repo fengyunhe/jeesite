@@ -39,24 +39,24 @@ public class ${ClassName}Service extends CrudService<${ClassName}Dao, ${ClassNam
 	private ${c.className?cap_first}Dao ${c.className?uncap_first}Dao;
 	</#list>
 	
-	public ${ClassName} get(String id) {
-		${ClassName} ${className} = super.get(id);
+	public ${ClassName}Vo get(String id) {
+		${ClassName}Vo ${className} = super.get(id);
 		<#list table.childList as c>
 		${className}.set${c.className?cap_first}List(${c.className?uncap_first}Dao.findList(new ${c.className?cap_first}(${className})));
 		</#list>
 		return ${className};
 	}
 	
-	public List<${ClassName}> findList(${ClassName} ${className}) {
+	public List<${ClassName}Vo> findList(${ClassName}Vo ${className}) {
 		return super.findList(${className});
 	}
 	
-	public Page<${ClassName}> findPage(Page<${ClassName}> page, ${ClassName} ${className}) {
+	public Page<${ClassName}Vo> findPage(Page<${ClassName}Vo> page, ${ClassName}Vo ${className}) {
 		return super.findPage(page, ${className});
 	}
 	
 	@Transactional(readOnly = false)
-	public void save(${ClassName} ${className}) {
+	public void save(${ClassName}Vo ${className}) {
 		super.save(${className});
 	<#list table.childList as c>
 		for (${c.className?cap_first} ${c.className?uncap_first} : ${className}.get${c.className?cap_first}List()){
@@ -86,7 +86,7 @@ public class ${ClassName}Service extends CrudService<${ClassName}Dao, ${ClassNam
 	}
 	
 	@Transactional(readOnly = false)
-	public void delete(${ClassName} ${className}) {
+	public void delete(${ClassName}Vo ${className}) {
 		super.delete(${className});
 	<#list table.childList as c>
 		${c.className?uncap_first}Dao.delete(new ${c.className?cap_first}(${className}));

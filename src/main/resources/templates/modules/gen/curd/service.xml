@@ -9,6 +9,7 @@
  */
 package ${packageName}.${moduleName}.service<#if subModuleName != "">.${subModuleName}</#if>;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -17,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
 import ${packageName}.${moduleName}.entity<#if subModuleName != "">.${subModuleName}</#if>.${ClassName};
+import ${packageName}.${moduleName}.vo<#if subModuleName != "">.${subModuleName}</#if>.${ClassName}Vo;
+import org.springframework.beans.BeanUtils;
 import ${packageName}.${moduleName}.dao<#if subModuleName != "">.${subModuleName}</#if>.${ClassName}Dao;
 
 /**
@@ -28,26 +31,54 @@ import ${packageName}.${moduleName}.dao<#if subModuleName != "">.${subModuleName
 @Transactional(readOnly = true)
 public class ${ClassName}Service extends CrudService<${ClassName}Dao, ${ClassName}> {
 
-	public ${ClassName} get(String id) {
-		return super.get(id);
+	public ${ClassName}Vo get(String id) {
+		${ClassName} po = super.get(id);
+		return this.convertPoToVo(po);
 	}
 	
-	public List<${ClassName}> findList(${ClassName} ${className}) {
-		return super.findList(${className});
+	public List<${ClassName}Vo> findList(${ClassName}Vo ${className}) {
+		List<${ClassName}> poList =  super.findList(${className});
+		return this.convertPoListToVoList(poList);
 	}
 	
-	public Page<${ClassName}> findPage(Page<${ClassName}> page, ${ClassName} ${className}) {
-		return super.findPage(page, ${className});
-	}
+	public Page<${ClassName}Vo> findPage(Page page, ${ClassName}Vo test) {
+        Page poPage = super.findPage(page, test);
+        List<${ClassName}Vo> voList = this.convertPoListToVoList(poPage.getList());
+        poPage.setList(voList);
+        return poPage;
+    }
 	
 	@Transactional(readOnly = false)
-	public void save(${ClassName} ${className}) {
+	public void save(${ClassName}Vo ${className}) {
 		super.save(${className});
 	}
 	
 	@Transactional(readOnly = false)
-	public void delete(${ClassName} ${className}) {
+	public void delete(${ClassName}Vo ${className}) {
 		super.delete(${className});
+	}
+
+
+	public List<${ClassName}Vo> convertPoListToVoList(List<${ClassName}> poList){
+		if (poList != null) {
+			List<${ClassName}Vo> voList = new ArrayList<${ClassName}Vo>();
+			for (${ClassName} test : poList) {
+				${ClassName}Vo vo = this.convertPoToVo(test);
+				voList.add(vo);
+			}
+			return voList;
+		}
+		return new ArrayList<${ClassName}Vo>();
+	}
+
+	private ${ClassName}Vo convertPoToVo(${ClassName} po) {
+		if (po == null) {
+			return null;
+		}
+		${ClassName}Vo vo = new ${ClassName}Vo();
+		BeanUtils.copyProperties(po, vo);
+		//TODO 设置其他vo中的属性
+		return vo;
 	}
 	
 }]]>

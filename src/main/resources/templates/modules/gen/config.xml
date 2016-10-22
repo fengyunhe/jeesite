@@ -5,6 +5,7 @@
 		<category value="curd" label="增删改查（单表）">
 			<template>curd/controller.xml</template>
 			<template>curd/service.xml</template>
+			<template>curd/vo.xml</template>
 			<template>category-ref:dao</template>
 			<template>curd/viewForm.xml</template>
 			<template>curd/viewList.xml</template>
