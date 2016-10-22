@@ -135,4 +135,10 @@ public class Comment extends DataEntity<Comment> {
 		this.delFlag = delFlag;
 	}
 
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
+
 }

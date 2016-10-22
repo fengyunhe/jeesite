@@ -93,4 +93,10 @@ public class Area extends TreeEntity<Area> {
 	public String toString() {
 		return name;
 	}
+
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
 }

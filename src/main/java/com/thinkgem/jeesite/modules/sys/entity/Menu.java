@@ -168,4 +168,10 @@ public class Menu extends DataEntity<Menu> {
 	public String toString() {
 		return name;
 	}
+
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
 }

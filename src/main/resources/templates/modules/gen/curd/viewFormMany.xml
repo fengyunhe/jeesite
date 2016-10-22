@@ -70,7 +70,7 @@
 		<li><a href="${r"${ctx}"}/${urlPrefix}/">${functionNameSimple}列表</a></li>
 		<li class="active"><a href="${r"${ctx}"}/${urlPrefix}/form?id=${"${"+className+".id}"}">${functionNameSimple}<shiro:hasPermission name="${permissionPrefix}:edit">${r"${not empty "+className+".id?'修改':'添加'}"}</shiro:hasPermission><shiro:lacksPermission name="${permissionPrefix}:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
-	<form:form id="inputForm" modelAttribute="${className}" action="${r"${ctx}"}/${urlPrefix}/save" method="post" class="form-horizontal">
+	<form:form id="inputForm" modelAttribute="${className}Vo" action="${r"${ctx}"}/${urlPrefix}/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${r"${message}"}"/>		
 		<#list table.columnList as c>

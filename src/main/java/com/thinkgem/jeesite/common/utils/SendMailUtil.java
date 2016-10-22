@@ -16,6 +16,8 @@ import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
+import static freemarker.template.Configuration.VERSION_2_3_23;
+
 /**
  * 发送电子邮件
  */
@@ -111,7 +113,7 @@ public class SendMailUtil {
 			hemail.setFrom(from, fromName);
 			hemail.setAuthentication(username, password);
 			hemail.setSubject(subject);
-			freeMarkerConfig = new Configuration();
+			freeMarkerConfig = new Configuration(VERSION_2_3_23);
 			freeMarkerConfig.setDirectoryForTemplateLoading(new File(
 					getFilePath()));
 			// 获取模板
@@ -167,7 +169,7 @@ public class SendMailUtil {
 		String htmlText = "";
 		try {
 			Configuration freeMarkerConfig = null;
-			freeMarkerConfig = new Configuration();
+			freeMarkerConfig = new Configuration(VERSION_2_3_23);
 			freeMarkerConfig.setDirectoryForTemplateLoading(new File(
 					getFilePath()));
 			// 获取模板

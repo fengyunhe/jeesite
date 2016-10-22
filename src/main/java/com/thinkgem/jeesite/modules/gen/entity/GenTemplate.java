@@ -94,7 +94,12 @@ public class GenTemplate extends DataEntity<GenTemplate> {
 			this.category = ","+StringUtils.join(categoryList, ",") + ",";
 		}
 	}
-	
+
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
 }
 
 

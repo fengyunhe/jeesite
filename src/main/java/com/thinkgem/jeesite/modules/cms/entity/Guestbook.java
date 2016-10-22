@@ -153,6 +153,12 @@ public class Guestbook extends DataEntity<Guestbook> {
 	public void setDelFlag(String delFlag) {
 		this.delFlag = delFlag;
 	}
+
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
 	
 }
 

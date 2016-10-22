@@ -87,4 +87,10 @@ public class ArticleData extends DataEntity<ArticleData> {
 		this.article = article;
 	}
 
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
+
 }

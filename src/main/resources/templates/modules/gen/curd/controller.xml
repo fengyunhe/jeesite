@@ -40,7 +40,7 @@ public class ${ClassName}Controller extends BaseController {
 	@Autowired
 	private ${ClassName}Service ${className}Service;
 	
-	@ModelAttribute("${className}")
+	@ModelAttribute
 	public ${ClassName}Vo get(@RequestParam(required=false) String id) {
 		${ClassName}Vo entity = null;
 		if (StringUtils.isNotBlank(id)){
@@ -54,34 +54,34 @@ public class ${ClassName}Controller extends BaseController {
 	
 	@RequiresPermissions("${permissionPrefix}:view")
 	@RequestMapping(value = {"list", ""})
-	public String list(${ClassName}Vo ${className}, HttpServletRequest request, HttpServletResponse response, Model model) {
-		Page<${ClassName}Vo> page = ${className}Service.findPage(new Page<${ClassName}Vo>(request, response), ${className});
+	public String list(${ClassName}Vo ${className}Vo, HttpServletRequest request, HttpServletResponse response, Model model) {
+		Page<${ClassName}Vo> page = ${className}Service.findPage(new Page<${ClassName}Vo>(request, response), ${className}Vo);
 		model.addAttribute("page", page);
 		return "${lastPackageName}/${viewPrefix}List";
 	}
 
 	@RequiresPermissions("${permissionPrefix}:view")
 	@RequestMapping(value = "form")
-	public String form(${ClassName}Vo ${className}, Model model) {
-		model.addAttribute("${className}", ${className});
+	public String form(${ClassName}Vo ${className}Vo, Model model) {
+		model.addAttribute("${className}", ${className}Vo);
 		return "${lastPackageName}/${viewPrefix}Form";
 	}
 
 	@RequiresPermissions("${permissionPrefix}:edit")
 	@RequestMapping(value = "save")
-	public String save(${ClassName}Vo ${className}, Model model, RedirectAttributes redirectAttributes) {
-		if (!beanValidator(model, ${className})){
-			return form(${className}, model);
+	public String save(${ClassName}Vo ${className}Vo, Model model, RedirectAttributes redirectAttributes) {
+		if (!beanValidator(model, ${className}Vo)){
+			return form(${className}Vo, model);
 		}
-		${className}Service.save(${className});
+		${className}Service.save(${className}Vo);
 		addMessage(redirectAttributes, "保存${functionNameSimple}成功");
 		return "redirect:"+Global.getAdminPath()+"/${viewPrefix}/?repage";
 	}
 	
 	@RequiresPermissions("${permissionPrefix}:edit")
 	@RequestMapping(value = "delete")
-	public String delete(${ClassName}Vo ${className}, RedirectAttributes redirectAttributes) {
-		${className}Service.delete(${className});
+	public String delete(${ClassName}Vo ${className}Vo, RedirectAttributes redirectAttributes) {
+		${className}Service.delete(${className}Vo);
 		addMessage(redirectAttributes, "删除${functionNameSimple}成功");
 		return "redirect:"+Global.getAdminPath()+"/${viewPrefix}/?repage";
 	}

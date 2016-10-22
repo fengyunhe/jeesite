@@ -96,4 +96,10 @@ public class TestDataMain extends DataEntity<TestDataMain> {
 	public void setTestDataChildList(List<TestDataChild> testDataChildList) {
 		this.testDataChildList = testDataChildList;
 	}
+
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
 }

@@ -149,36 +149,28 @@ ${columnField?substring(0, columnField?last_index_of(","))}
 	
 	<insert id="insert">
 		INSERT INTO ${table.name}(
-		<#assign insertField>
-			<#list table.columnList as c>
-				<#if c.isInsert?? && c.isInsert == "1">
-			${c.name},
-				</#if>
+			<#list table.insertColumnList as c>
+			<if test="${c.javaField}!=null">
+			${c.name}<#sep>, </#sep>
+			</if>
 			</#list>
-		</#assign>
-${insertField?substring(0, insertField?last_index_of(","))}
-		) VALUES (
-		<#assign insertJavaField>
-			<#list table.columnList as c>
-				<#if c.isInsert?? && c.isInsert == "1">
-			${"#"}{${c.javaFieldId}},
-				</#if>
+
+ 		) VALUES (
+			<#list table.insertColumnList as c>
+			<if test="${c.javaField}!=null">
+			${"#"}{${c.javaFieldId}}<#sep>, </#sep>
+			</if>
 			</#list>
-		</#assign>
-${insertJavaField?substring(0, insertJavaField?last_index_of(","))}
 		)
 	</insert>
 	
 	<update id="update">
 		UPDATE ${table.name} SET 	
-			<#assign updateField>		
-				<#list table.columnList as c>
-					<#if c.isEdit?? && c.isEdit == "1">
-			${c.name} = ${"#"}{${c.javaFieldId}},
-					</#if>
+				<#list table.editColumnList as c>
+				<if test="${c.javaField}!=null">
+			${c.name} = ${"#"}{${c.javaFieldId}}<#sep>, </#sep>
+				</if>
 				</#list>
-			</#assign>
-${updateField?substring(0, updateField?last_index_of(","))}
 		WHERE id = ${"#"}{id}
 	</update>
 	

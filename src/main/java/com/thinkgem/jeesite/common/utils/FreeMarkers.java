@@ -14,6 +14,8 @@ import org.springframework.core.io.Resource;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
+import static freemarker.template.Configuration.VERSION_2_3_23;
+
 /**
  * FreeMarkers工具类
  * @author ThinkGem
@@ -24,7 +26,7 @@ public class FreeMarkers {
 	public static String renderString(String templateString, Map<String, ?> model) {
 		try {
 			StringWriter result = new StringWriter();
-			Template t = new Template("name", new StringReader(templateString), new Configuration());
+			Template t = new Template("name", new StringReader(templateString), new Configuration(VERSION_2_3_23));
 			t.process(model, result);
 			return result.toString();
 		} catch (Exception e) {
@@ -43,7 +45,7 @@ public class FreeMarkers {
 	}
 
 	public static Configuration buildConfiguration(String directory) throws IOException {
-		Configuration cfg = new Configuration();
+		Configuration cfg = new Configuration(VERSION_2_3_23);
 		Resource path = new DefaultResourceLoader().getResource(directory);
 		cfg.setDirectoryForTemplateLoading(path.getFile());
 		return cfg;

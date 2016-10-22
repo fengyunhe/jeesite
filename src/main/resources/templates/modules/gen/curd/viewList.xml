@@ -27,7 +27,7 @@
 		<li class="active"><a href="${r"${ctx}"}/${urlPrefix}/">${functionNameSimple}列表</a></li>
 		<shiro:hasPermission name="${permissionPrefix}:edit"><li><a href="${r"${ctx}"}/${urlPrefix}/form">${functionNameSimple}添加</a></li></shiro:hasPermission>
 	</ul>
-	<form:form id="searchForm" modelAttribute="${className}" action="${r"${ctx}"}/${urlPrefix}/" method="post" class="breadcrumb form-search">
+	<form:form id="searchForm" modelAttribute="${className}Vo" action="${r"${ctx}"}/${urlPrefix}/" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${r"${page.pageNo}"}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${r"${page.pageSize}"}"/>
 		<ul class="ul-form">
@@ -91,17 +91,27 @@
 				<#assign firstListField = true>
 				<#list table.columnList as c>
 					<#if c.isList?? && c.isList == "1">
-				<td><#if firstListField><a href="${r"${ctx}"}/${urlPrefix}/form?id=${"${"+className+".id}"}"></#if>
+				<td>
+				<#if firstListField><a href="${r"${ctx}"}/${urlPrefix}/form?id=${"${"+className+".id}"}"></#if>
 				<#if c.simpleJavaType == "Date">
 					<fmt:formatDate value="${"$"}{${className}.${c.javaFieldId}}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				<#elseif c.showType == "select" || c.showType == "checkbox" || c.showType == "radiobox">
 					${"$"}{fns:getDictLabel(${className}.${c.javaFieldId}, '${c.dictType}', '')}
 				<#elseif c.showType == "userselect" || c.showType == "officeselect" || c.showType == "areaselect">
 					${"$"}{${className}.${c.javaFieldName}}
+				<#elseif c.showType == "fileselect">
+				    <a href='${"$"}{${className}.${c.javaFieldId}}' target="_blank">文件</a>
+				<#elseif c.showType == "fileselects">
+				    <c:forEach var ="f" items="${"$"}{fn:split(${className}.${c.javaFieldId},'|')}" varStatus="current">
+				    	<c:if test="${"$"}{!empty f}">
+				    	<a href='${"$"}{f}' target="_blank">文件 ${"$"}{current.index+1}</a>
+				    	</c:if>
+				    </c:forEach>
 				<#else>
 					${"$"}{${className}.${c.javaFieldId}}
 				</#if>
-				<#if firstListField></a></#if></td>
+				<#if firstListField></a></#if>
+				</td>
 						<#assign firstListField = false>
 					</#if>
 				</#list>

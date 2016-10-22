@@ -326,4 +326,10 @@ public class Category extends TreeEntity<Category> {
    	public String getUrl() {
         return CmsUtils.getUrlDynamic(this);
    	}
+
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
 }

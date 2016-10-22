@@ -67,5 +67,10 @@ public class OaNotifyRecord extends DataEntity<OaNotifyRecord> {
 	public void setReadDate(Date readDate) {
 		this.readDate = readDate;
 	}
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
 	
 }

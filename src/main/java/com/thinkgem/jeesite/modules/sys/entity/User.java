@@ -321,4 +321,10 @@ public class User extends DataEntity<User> {
 	public String toString() {
 		return id;
 	}
+
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
 }

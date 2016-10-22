@@ -3,6 +3,7 @@
  */
 package com.thinkgem.jeesite.modules.gen.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.validator.constraints.Length;
@@ -211,6 +212,30 @@ public class GenTable extends DataEntity<GenTable> {
 			}
 		}
 		return false;
+	}
+
+	public List getInsertColumnList(){
+		List<GenTableColumn> insertColumnList = new ArrayList<GenTableColumn>();
+		if (columnList != null) {
+			for (GenTableColumn genTableColumn : columnList) {
+				if (genTableColumn.getIsInsert().equals("1")) {
+					insertColumnList.add(genTableColumn);
+				}
+			}
+		}
+		return insertColumnList;
+	}
+
+	public List getEditColumnList(){
+		List<GenTableColumn> editColumnList = new ArrayList<GenTableColumn>();
+		if (columnList != null) {
+			for (GenTableColumn genTableColumn : columnList) {
+				if (genTableColumn.getIsEdit().equals("1")) {
+					editColumnList.add(genTableColumn);
+				}
+			}
+		}
+		return editColumnList;
 	}
 }
 

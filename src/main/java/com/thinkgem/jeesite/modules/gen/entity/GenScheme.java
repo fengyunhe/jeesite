@@ -125,6 +125,12 @@ public class GenScheme extends DataEntity<GenScheme> {
 	public void setReplaceFile(Boolean replaceFile) {
 		this.replaceFile = replaceFile;
 	}
+
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
 	
 }
 

@@ -47,5 +47,11 @@ public class TestDataChild extends DataEntity<TestDataChild> {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
 	
 }

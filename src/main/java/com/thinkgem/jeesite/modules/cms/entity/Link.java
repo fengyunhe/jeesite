@@ -112,5 +112,11 @@ public class Link extends DataEntity<Link> {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
 	
 }

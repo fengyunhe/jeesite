@@ -47,7 +47,12 @@ public class GenCategory extends Dict {
 	public void setChildTableTemplate(List<String> childTableTemplate) {
 		this.childTableTemplate = childTableTemplate;
 	}
-	
+
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
 }
 
 

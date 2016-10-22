@@ -168,4 +168,10 @@ public class OaNotify extends DataEntity<OaNotify> {
 	public void setReadFlag(String readFlag) {
 		this.readFlag = readFlag;
 	}
+
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
 }

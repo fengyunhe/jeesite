@@ -145,4 +145,10 @@ public class Log extends DataEntity<Log> {
 	public String toString() {
 		return ReflectionToStringBuilder.toString(this);
 	}
+
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
 }

@@ -54,4 +54,10 @@ public abstract class ActEntity<T> extends DataEntity<T> implements Serializable
 	public void setProcInsId(String procInsId) {
 		this.getAct().setProcInsId(procInsId);
 	}
+
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
 }

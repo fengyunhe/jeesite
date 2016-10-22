@@ -103,5 +103,10 @@ public class TestData extends DataEntity<TestData> {
 	public void setEndInDate(Date endInDate) {
 		this.endInDate = endInDate;
 	}
-		
+
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
 }

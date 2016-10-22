@@ -50,10 +50,9 @@ public abstract class BaseEntity<T> implements Serializable {
 	protected Map<String, String> sqlMap;
 	
 	/**
-	 * 是否是新记录（默认：false），调用setIsNewRecord()设置新记录，使用自定义ID。
-	 * 设置为true后强制执行插入语句，ID不会自动生成，需从手动传入。
+	 * 默认为新记录生成uuid
 	 */
-	protected boolean isNewRecord = false;
+	protected boolean genUuid = false;
 
 	public BaseEntity() {
 		
@@ -66,6 +65,9 @@ public abstract class BaseEntity<T> implements Serializable {
 
 	@SupCol(isUnique="true", isHide="true")
 	public String getId() {
+		if ("".equals(id)) {
+			return null;
+		}
 		return id;
 	}
 
@@ -129,16 +131,8 @@ public abstract class BaseEntity<T> implements Serializable {
      * @return
      */
 	public boolean getIsNewRecord() {
-        return isNewRecord || StringUtils.isBlank(getId());
+        return StringUtils.isBlank(getId());
     }
-
-	/**
-	 * 是否是新记录（默认：false），调用setIsNewRecord()设置新记录，使用自定义ID。
-	 * 设置为true后强制执行插入语句，ID不会自动生成，需从手动传入。
-	 */
-	public void setIsNewRecord(boolean isNewRecord) {
-		this.isNewRecord = isNewRecord;
-	}
 
 	/**
 	 * 全局变量对象

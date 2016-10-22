@@ -148,5 +148,10 @@ public class Site extends DataEntity<Site> {
 	public void setDomain(String domain) {
 		this.domain = domain;
 	}
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
 	
 }

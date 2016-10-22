@@ -176,6 +176,12 @@ public class TestAudit extends ActEntity<TestAudit> {
 	public void setAddNum(String addNum) {
 		this.addNum = addNum;
 	}
+
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
 	
 }
 

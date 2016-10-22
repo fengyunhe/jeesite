@@ -304,7 +304,11 @@ public class GenTableColumn extends DataEntity<GenTableColumn> {
 				&& !StringUtils.equals(getSimpleJavaField(), "updateDate")
 				&& !StringUtils.equals(getSimpleJavaField(), "delFlag");
 	}
-	
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
 }
 
 

@@ -214,4 +214,10 @@ public class Office extends TreeEntity<Office> {
 	public String toString() {
 		return name;
 	}
+
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
 }

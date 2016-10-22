@@ -99,4 +99,9 @@ public class Dict extends DataEntity<Dict> {
 	public String toString() {
 		return label;
 	}
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
 }

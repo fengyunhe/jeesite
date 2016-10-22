@@ -204,7 +204,12 @@ public class Leave extends DataEntity<Leave> {
 	public void setCreateDateEnd(Date createDateEnd) {
 		this.createDateEnd = createDateEnd;
 	}
-	
+
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
+	}
 }
 
 
