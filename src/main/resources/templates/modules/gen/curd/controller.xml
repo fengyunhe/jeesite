@@ -67,6 +67,13 @@ public class ${ClassName}Controller extends BaseController {
 		return "${lastPackageName}/${viewPrefix}Form";
 	}
 
+	@RequiresPermissions("${permissionPrefix}:view")
+	@RequestMapping(value = "show")
+	public String show(${ClassName}Vo ${className}Vo, Model model) {
+		model.addAttribute("${className}", ${className}Vo);
+		return "${lastPackageName}/${viewPrefix}Show";
+	}
+
 	@RequiresPermissions("${permissionPrefix}:edit")
 	@RequestMapping(value = "save")
 	public String save(${ClassName}Vo ${className}Vo, Model model, RedirectAttributes redirectAttributes) {

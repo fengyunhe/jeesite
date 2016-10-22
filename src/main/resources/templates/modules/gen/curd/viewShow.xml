@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>viewForm</name>
+	<filePath>src/main/webapp/WEB-INF/views/${lastPackageName}/${moduleName}/${subModuleName}</filePath>
+	<fileName>${className}Show.jsp</fileName>
+	<content><![CDATA[
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="/WEB-INF/views/include/taglib.jsp"%>
+<html>
+<head>
+	<title>${functionNameSimple}管理</title>
+	<meta name="decorator" content="default"/>
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+		});
+	</script>
+</head>
+<body>
+	<ul class="nav nav-tabs">
+		<li><a href="${r"${ctx}"}/${urlPrefix}/">${functionNameSimple}列表</a></li>
+		<li class="active"><a href="${r"${ctx}"}/${urlPrefix}/form?id=${"${"+className+".id}"}">${functionNameSimple}<shiro:hasPermission name="${permissionPrefix}:edit">${r"${not empty "+className+".id?'修改':'添加'}"}</shiro:hasPermission><shiro:lacksPermission name="${permissionPrefix}:edit">查看</shiro:lacksPermission></a></li>
+	</ul><br/>
+<table class="table">
+
+		<#list table.columnList as c>
+			<#if c.isEdit?? && c.isEdit == "1" && (c.isNotBaseField || c.simpleJavaField == 'remarks')>
+		<tr>
+			<th>${c.comments}：</th>
+			<td>
+			<#if c.showType == "input">
+				${"$"}{${className}.${c.javaFieldId}}
+			<#elseif c.showType == "textarea">
+				${"$"}{${className}.${c.javaFieldId}}
+			<#elseif c.showType == "select">
+				${"$"}{fns:getDictLabel(${className}.${c.javaFieldId},'${c.dictType}' ,null)}
+			<#elseif c.showType == "checkbox">
+				<form:checkboxes path="${c.javaFieldId}" items="${"$"}{fns:getDictList('${c.dictType}')}" itemLabel="label" itemValue="value" htmlEscape="false" class="<#if c.isNull != "1">required</#if>"/>
+			<#elseif c.showType == "radiobox">
+				${"$"}{fns:getDictLabel(${className}.${c.javaFieldId},'${c.dictType}' ,null)}
+			<#elseif c.showType == "dateselect">
+				<fmt:formatDate value="${"$"}{${className}.${c.javaFieldId}}" pattern="yyyy-MM-dd HH:mm:ss"/>
+			<#elseif c.showType == "userselect">
+
+			${"$"}{fns:getUserById(${className}.${c.javaFieldId}).name}
+
+			<#elseif c.showType == "officeselect">
+
+			<!-- TODO 这里应该显示部门名称-->
+				${"$"}{${className}.${c.javaFieldId}}
+			<#elseif c.showType == "areaselect">
+				<!-- TODO 这里应该显示区域名称-->
+				${"$"}{${className}.${c.javaFieldId}}
+			<#elseif c.showType == "fileselect">
+				    <a href='${"$"}{${className}.${c.javaFieldId}}' target="_blank">文件</a>
+			<#elseif c.showType == "fileselects">
+				    <c:forEach var ="f" items="${"$"}{fn:split(${className}.${c.javaFieldId},'|')}" varStatus="current">
+				    	<c:if test="${"$"}{!empty f}">
+				    	<a href='${"$"}{f}' target="_blank">文件 ${"$"}{current.index+1}</a>
+				    	</c:if>
+				    </c:forEach>
+			<#else>
+					${"$"}{${className}.${c.javaFieldId}}
+			</#if>
+			<#if c.isNull != "1">
+				<span class="help-inline"><font color="red">*</font> </span>
+			</#if>
+			</td>
+		</tr>
+			</#if>
+		</#list>
+		<tr>
+			<td colspan="2"><input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/></td>
+		</tr>
+</body>
+</html>]]>
+	</content>
+</template>
