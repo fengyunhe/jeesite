@@ -13,84 +13,103 @@
 <body>
 	<ul class="nav nav-tabs">
 		<li><a href="${ctx}/teacher/scTeacher/">教师信息列表</a></li>
-		<li class="active"><a href="${ctx}/teacher/scTeacher/form?id=${scTeacher.id}">教师信息<shiro:hasPermission name="teacher:scTeacher:edit">${not empty scTeacher.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="teacher:scTeacher:edit">查看</shiro:lacksPermission></a></li>
+		<li class="active"><a href="${ctx}/teacher/scTeacher/form?id=${scTeacherVo.id}">教师信息查看</a></li>
 	</ul><br/>
 <table class="table">
-
+		<tr>
+			<td colspan="2"><input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/></td>
+		</tr>
 		<tr>
 			<th>教师编号：</th>
 			<td>
-				${scTeacher.teNo}
+				${scTeacherVo.teNo}
 			</td>
 		</tr>
 		<tr>
 			<th>姓名：</th>
 			<td>
-				${scTeacher.name}
+				${scTeacherVo.name}
 				<span class="help-inline"><font color="red">*</font> </span>
 			</td>
 		</tr>
 		<tr>
 			<th>性别：</th>
 			<td>
-				${fns:getDictLabel(scTeacher.gender,'gender' ,null)}
+				${fns:getDictLabel(scTeacherVo.gender,'gender' ,null)}
 				<span class="help-inline"><font color="red">*</font> </span>
 			</td>
 		</tr>
 		<tr>
 			<th>头像：</th>
 			<td>
-				    <c:forEach var ="f" items="${fn:split(scTeacher.photoUrl,'|')}" varStatus="current">
-				    	<c:if test="${!empty f}">
-				    	<a href='${f}' target="_blank">文件 ${current.index+1}</a>
-				    	</c:if>
-				    </c:forEach>
+					${scTeacherVo.photoUrl}
 			</td>
 		</tr>
 		<tr>
 			<th>手机号：</th>
 			<td>
-				${scTeacher.phone}
+				${scTeacherVo.phone}
 			</td>
 		</tr>
 		<tr>
 			<th>邮箱：</th>
 			<td>
-				${scTeacher.email}
+				${scTeacherVo.email}
 			</td>
 		</tr>
 		<tr>
 			<th>住址：</th>
 			<td>
-				${scTeacher.address}
+				${scTeacherVo.address}
 			</td>
 		</tr>
 		<tr>
 			<th>QQ：</th>
 			<td>
-				${scTeacher.qq}
+				${scTeacherVo.qq}
 			</td>
 		</tr>
 		<tr>
 			<th>微信号：</th>
 			<td>
-				${scTeacher.wechat}
+				${scTeacherVo.wechat}
 			</td>
 		</tr>
 		<tr>
 			<th>身份证号：</th>
 			<td>
-				${scTeacher.idNo}
+				${scTeacherVo.idNo}
+			</td>
+		</tr>
+		<tr>
+			<th>主要学科：</th>
+			<td>
+				${fns:getDictLabel(scTeacherVo.courseId,'sc_course' ,null)}
+			</td>
+		</tr>
+		<tr>
+			<th>职称等级：</th>
+			<td>
+				${fns:getDictLabel(scTeacherVo.levelId,'sc_teacher_level' ,null)}
+			</td>
+		</tr>
+		<tr>
+			<th>职务：</th>
+			<td>
+				${fns:getDictLabel(scTeacherVo.jobId,'sc_teacher_job' ,null)}
+			</td>
+		</tr>
+		<tr>
+			<th>生日：</th>
+			<td>
+				<fmt:formatDate value="${scTeacherVo.birthday}" pattern="yyyy-MM-dd"/>
 			</td>
 		</tr>
 		<tr>
 			<th>备注信息：</th>
 			<td>
-				${scTeacher.remarks}
+				${scTeacherVo.remarks}
 			</td>
-		</tr>
-		<tr>
-			<td colspan="2"><input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/></td>
 		</tr>
 </body>
 </html>

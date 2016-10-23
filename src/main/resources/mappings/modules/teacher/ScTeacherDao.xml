@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fengyunhe.school.modules.teacher.dao.ScTeacherDao">
+    
+	<sql id="scTeacherColumns">
+		a.id AS "id",
+		a.te_no AS "teNo",
+		a.name AS "name",
+		a.gender AS "gender",
+		a.photo_url AS "photoUrl",
+		a.phone AS "phone",
+		a.email AS "email",
+		a.address AS "address",
+		a.qq AS "qq",
+		a.wechat AS "wechat",
+		a.id_no AS "idNo",
+		a.course_id AS "courseId",
+		a.level_id AS "levelId",
+		a.job_id AS "jobId",
+		a.birthday AS "birthday",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="scTeacherJoins">
+	</sql>
+    
+	<select id="get" resultType="ScTeacher">
+		SELECT 
+			<include refid="scTeacherColumns"/>
+		FROM sc_teacher a
+		<include refid="scTeacherJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ScTeacher">
+		SELECT 
+			<include refid="scTeacherColumns"/>
+		FROM sc_teacher a
+		<include refid="scTeacherJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="teNo != null and teNo != ''">
+				AND a.te_no = #{teNo}
+			</if>
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="gender != null and gender != ''">
+				AND a.gender = #{gender}
+			</if>
+			<if test="phone != null and phone != ''">
+				AND a.phone = #{phone}
+			</if>
+			<if test="email != null and email != ''">
+				AND a.email = #{email}
+			</if>
+			<if test="address != null and address != ''">
+				AND a.address LIKE 
+					<if test="dbName == 'oracle'">'%'||#{address}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{address}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{address},'%')</if>
+			</if>
+			<if test="idNo != null and idNo != ''">
+				AND a.id_no = #{idNo}
+			</if>
+			<if test="courseId != null and courseId != ''">
+				AND a.course_id = #{courseId}
+			</if>
+			<if test="levelId != null and levelId != ''">
+				AND a.level_id = #{levelId}
+			</if>
+			<if test="jobId != null and jobId != ''">
+				AND a.job_id = #{jobId}
+			</if>
+			<if test="beginBirthday != null and endBirthday != null and beginBirthday != '' and endBirthday != ''">
+				AND a.birthday BETWEEN #{beginBirthday} AND #{endBirthday}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ScTeacher">
+		SELECT 
+			<include refid="scTeacherColumns"/>
+		FROM sc_teacher a
+		<include refid="scTeacherJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO sc_teacher(
+			<if test="id!=null">
+			id, 
+			</if>
+			<if test="teNo!=null">
+			te_no, 
+			</if>
+			<if test="name!=null">
+			name, 
+			</if>
+			<if test="gender!=null">
+			gender, 
+			</if>
+			<if test="photoUrl!=null">
+			photo_url, 
+			</if>
+			<if test="phone!=null">
+			phone, 
+			</if>
+			<if test="email!=null">
+			email, 
+			</if>
+			<if test="address!=null">
+			address, 
+			</if>
+			<if test="qq!=null">
+			qq, 
+			</if>
+			<if test="wechat!=null">
+			wechat, 
+			</if>
+			<if test="idNo!=null">
+			id_no, 
+			</if>
+			<if test="courseId!=null">
+			course_id, 
+			</if>
+			<if test="levelId!=null">
+			level_id, 
+			</if>
+			<if test="jobId!=null">
+			job_id, 
+			</if>
+			<if test="birthday!=null">
+			birthday, 
+			</if>
+			<if test="createBy.id!=null">
+			create_by, 
+			</if>
+			<if test="createDate!=null">
+			create_date, 
+			</if>
+			<if test="updateBy.id!=null">
+			update_by, 
+			</if>
+			<if test="updateDate!=null">
+			update_date, 
+			</if>
+			<if test="remarks!=null">
+			remarks
+			</if>
+
+ 		) VALUES (
+			<if test="id!=null">
+			#{id}, 
+			</if>
+			<if test="teNo!=null">
+			#{teNo}, 
+			</if>
+			<if test="name!=null">
+			#{name}, 
+			</if>
+			<if test="gender!=null">
+			#{gender}, 
+			</if>
+			<if test="photoUrl!=null">
+			#{photoUrl}, 
+			</if>
+			<if test="phone!=null">
+			#{phone}, 
+			</if>
+			<if test="email!=null">
+			#{email}, 
+			</if>
+			<if test="address!=null">
+			#{address}, 
+			</if>
+			<if test="qq!=null">
+			#{qq}, 
+			</if>
+			<if test="wechat!=null">
+			#{wechat}, 
+			</if>
+			<if test="idNo!=null">
+			#{idNo}, 
+			</if>
+			<if test="courseId!=null">
+			#{courseId}, 
+			</if>
+			<if test="levelId!=null">
+			#{levelId}, 
+			</if>
+			<if test="jobId!=null">
+			#{jobId}, 
+			</if>
+			<if test="birthday!=null">
+			#{birthday}, 
+			</if>
+			<if test="createBy.id!=null">
+			#{createBy.id}, 
+			</if>
+			<if test="createDate!=null">
+			#{createDate}, 
+			</if>
+			<if test="updateBy.id!=null">
+			#{updateBy.id}, 
+			</if>
+			<if test="updateDate!=null">
+			#{updateDate}, 
+			</if>
+			<if test="remarks!=null">
+			#{remarks}
+			</if>
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sc_teacher SET 	
+				<if test="teNo!=null">
+			te_no = #{teNo}, 
+				</if>
+				<if test="name!=null">
+			name = #{name}, 
+				</if>
+				<if test="gender!=null">
+			gender = #{gender}, 
+				</if>
+				<if test="photoUrl!=null">
+			photo_url = #{photoUrl}, 
+				</if>
+				<if test="phone!=null">
+			phone = #{phone}, 
+				</if>
+				<if test="email!=null">
+			email = #{email}, 
+				</if>
+				<if test="address!=null">
+			address = #{address}, 
+				</if>
+				<if test="qq!=null">
+			qq = #{qq}, 
+				</if>
+				<if test="wechat!=null">
+			wechat = #{wechat}, 
+				</if>
+				<if test="idNo!=null">
+			id_no = #{idNo}, 
+				</if>
+				<if test="courseId!=null">
+			course_id = #{courseId}, 
+				</if>
+				<if test="levelId!=null">
+			level_id = #{levelId}, 
+				</if>
+				<if test="jobId!=null">
+			job_id = #{jobId}, 
+				</if>
+				<if test="birthday!=null">
+			birthday = #{birthday}, 
+				</if>
+				<if test="updateBy.id!=null">
+			update_by = #{updateBy.id}, 
+				</if>
+				<if test="updateDate!=null">
+			update_date = #{updateDate}, 
+				</if>
+				<if test="remarks!=null">
+			remarks = #{remarks}, 
+				</if>
+				<if test="delFlag!=null">
+			del_flag = #{delFlag}
+				</if>
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE sc_teacher SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
