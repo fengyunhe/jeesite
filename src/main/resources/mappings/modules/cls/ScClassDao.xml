@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fengyunhe.school.modules.cls.dao.ScClassDao">
+    
+	<sql id="scClassColumns">
+		a.id AS "id",
+		a.grade_id AS "gradeId",
+		a.name AS "name",
+		a.seq AS "seq",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="scClassJoins">
+	</sql>
+    
+	<select id="get" resultType="ScClass">
+		SELECT 
+			<include refid="scClassColumns"/>
+		FROM sc_class a
+		<include refid="scClassJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ScClass">
+		SELECT 
+			<include refid="scClassColumns"/>
+		FROM sc_class a
+		<include refid="scClassJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="gradeId != null and gradeId != ''">
+				AND a.grade_id = #{gradeId}
+			</if>
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ScClass">
+		SELECT 
+			<include refid="scClassColumns"/>
+		FROM sc_class a
+		<include refid="scClassJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO sc_class(
+			<if test="id!=null">
+			id, 
+			</if>
+			<if test="gradeId!=null">
+			grade_id, 
+			</if>
+			<if test="name!=null">
+			name, 
+			</if>
+			<if test="seq!=null">
+			seq, 
+			</if>
+			<if test="createBy.id!=null">
+			create_by, 
+			</if>
+			<if test="createDate!=null">
+			create_date, 
+			</if>
+			<if test="updateBy.id!=null">
+			update_by, 
+			</if>
+			<if test="updateDate!=null">
+			update_date, 
+			</if>
+			<if test="remarks!=null">
+			remarks, 
+			</if>
+			<if test="delFlag!=null">
+			del_flag
+			</if>
+
+ 		) VALUES (
+			<if test="id!=null">
+			#{id}, 
+			</if>
+			<if test="gradeId!=null">
+			#{gradeId}, 
+			</if>
+			<if test="name!=null">
+			#{name}, 
+			</if>
+			<if test="seq!=null">
+			#{seq}, 
+			</if>
+			<if test="createBy.id!=null">
+			#{createBy.id}, 
+			</if>
+			<if test="createDate!=null">
+			#{createDate}, 
+			</if>
+			<if test="updateBy.id!=null">
+			#{updateBy.id}, 
+			</if>
+			<if test="updateDate!=null">
+			#{updateDate}, 
+			</if>
+			<if test="remarks!=null">
+			#{remarks}, 
+			</if>
+			<if test="delFlag!=null">
+			#{delFlag}
+			</if>
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sc_class SET 	
+				<if test="gradeId!=null">
+			grade_id = #{gradeId}, 
+				</if>
+				<if test="name!=null">
+			name = #{name}, 
+				</if>
+				<if test="seq!=null">
+			seq = #{seq}, 
+				</if>
+				<if test="updateBy.id!=null">
+			update_by = #{updateBy.id}, 
+				</if>
+				<if test="updateDate!=null">
+			update_date = #{updateDate}, 
+				</if>
+				<if test="remarks!=null">
+			remarks = #{remarks}
+				</if>
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE sc_class SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

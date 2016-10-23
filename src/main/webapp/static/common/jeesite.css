@@ -59,7 +59,7 @@ input.btn:hover {*color:#333333}
 .form-horizontal .controls label.error {background-position:0 2px;}
 
 .form-horizontal .table-form{width:100%;border-color:#dddddd;}
-.form-horizontal .table-form, .form-horizontal .table-form td{border:1px solid #ddd;background-color:#fdfdfd;padding:4px;} 
+.form-horizontal .table-form, .form-horizontal .table-form td{border:1px solid #ddd;background-color:#fdfdfd;padding:4px;}
 .form-horizontal .table-form td.tit{background:#fafafa;text-align:center;padding-right:8px;white-space:nowrap;}
 .form-horizontal .form-actions{margin-bottom:0;}
 
@@ -87,6 +87,6 @@ input.btn:hover {*color:#333333}
 .accordion-inner .nav-list {margin-bottom:4px;}
 .accordion-inner .nav-list li a {padding:3px 0px 3px 8px;}
 
-#left,#right,#openClose {float:left;} #openClose {width:6px;margin:0 1px;cursor:pointer;}
-#openClose,#openClose.close {background:#efefef url("../images/openclose.png") no-repeat -29px center;}
+#left,#right,#openClose {float:left;} #openClose {width:4px;margin:0 1px;cursor:pointer;}
+#openClose,#openClose.close {background:linear-gradient(#fff,#fff,#eee,#fff,#fff)}
 #openClose.close {background-position:1px center;opacity:0.5;filter:alpha(opacity=50)}
