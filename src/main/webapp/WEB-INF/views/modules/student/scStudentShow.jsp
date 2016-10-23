@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>教师信息管理</title>
+	<title>学生信息管理</title>
 	<meta name="decorator" content="default"/>
 	<!-- Add fancyBox -->
     <link rel="stylesheet" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" type="text/css" media="screen" />
@@ -26,103 +26,104 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/teacher/scTeacher/">教师信息列表</a></li>
-		<li class="active"><a href="${ctx}/teacher/scTeacher/form?id=${scTeacherVo.id}">教师信息查看</a></li>
+		<li><a href="${ctx}/student/scStudent/">学生信息列表</a></li>
+		<li class="active"><a href="${ctx}/student/scStudent/form?id=${scStudentVo.id}">学生信息查看</a></li>
 	</ul><br/>
 <table class="table">
 		<tr>
 			<td colspan="2"><input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/></td>
 		</tr>
 		<tr>
-			<th width="200">教师编号：</th>
+			<th width="200">姓名：</th>
 			<td>
-				${scTeacherVo.teNo}
+				${scStudentVo.name}
+				<span class="help-inline"><font color="red">*</font> </span>
 			</td>
 		</tr>
 		<tr>
-			<th width="200">姓名：</th>
+			<th width="200">学号：</th>
 			<td>
-				${scTeacherVo.name}
+				${scStudentVo.stNo}
 				<span class="help-inline"><font color="red">*</font> </span>
+			</td>
+		</tr>
+		<tr>
+			<th width="200">照片：</th>
+			<td>
+				    <a href='${scStudentVo.photoUrl}' target="_blank" class="imagelink" title=""><img src='${scStudentVo.photoUrl}' /></a>
 			</td>
 		</tr>
 		<tr>
 			<th width="200">性别：</th>
 			<td>
-				${fns:getDictLabel(scTeacherVo.gender,'gender' ,null)}
+				${fns:getDictLabel(scStudentVo.gender,'gender' ,null)}
 				<span class="help-inline"><font color="red">*</font> </span>
 			</td>
 		</tr>
 		<tr>
-			<th width="200">头像：</th>
+			<th width="200">身份证号码：</th>
 			<td>
-				    <a href='${scTeacherVo.photoUrl}' target="_blank" class="imagelink" title=""><img src='${scTeacherVo.photoUrl}' /></a>
-			</td>
-		</tr>
-		<tr>
-			<th width="200">手机号：</th>
-			<td>
-				${scTeacherVo.phone}
-			</td>
-		</tr>
-		<tr>
-			<th width="200">邮箱：</th>
-			<td>
-				${scTeacherVo.email}
-			</td>
-		</tr>
-		<tr>
-			<th width="200">住址：</th>
-			<td>
-				${scTeacherVo.address}
-			</td>
-		</tr>
-		<tr>
-			<th width="200">QQ：</th>
-			<td>
-				${scTeacherVo.qq}
-			</td>
-		</tr>
-		<tr>
-			<th width="200">微信号：</th>
-			<td>
-				${scTeacherVo.wechat}
-			</td>
-		</tr>
-		<tr>
-			<th width="200">身份证号：</th>
-			<td>
-				${scTeacherVo.idNo}
-			</td>
-		</tr>
-		<tr>
-			<th width="200">主要学科：</th>
-			<td>
-				${fns:getDictLabel(scTeacherVo.courseId,'sc_course' ,null)}
-			</td>
-		</tr>
-		<tr>
-			<th width="200">职称等级：</th>
-			<td>
-				${fns:getDictLabel(scTeacherVo.levelId,'sc_teacher_level' ,null)}
-			</td>
-		</tr>
-		<tr>
-			<th width="200">职务：</th>
-			<td>
-				${fns:getDictLabel(scTeacherVo.jobId,'sc_teacher_job' ,null)}
+				${scStudentVo.idNo}
 			</td>
 		</tr>
 		<tr>
 			<th width="200">生日：</th>
 			<td>
-				<fmt:formatDate value="${scTeacherVo.birthday}" pattern="yyyy-MM-dd"/>
+				<fmt:formatDate value="${scStudentVo.birthday}" pattern="yyyy-MM-dd"/>
+			</td>
+		</tr>
+		<tr>
+			<th width="200">微信：</th>
+			<td>
+				${scStudentVo.wechat}
+			</td>
+		</tr>
+		<tr>
+			<th width="200">QQ：</th>
+			<td>
+				${scStudentVo.qq}
+			</td>
+		</tr>
+		<tr>
+			<th width="200">父亲姓名：</th>
+			<td>
+				${scStudentVo.fatherName}
+			</td>
+		</tr>
+		<tr>
+			<th width="200">母亲姓名：</th>
+			<td>
+				${scStudentVo.motherName}
+			</td>
+		</tr>
+		<tr>
+			<th width="200">父亲电话：</th>
+			<td>
+				${scStudentVo.fatherPhone}
+			</td>
+		</tr>
+		<tr>
+			<th width="200">母亲电话：</th>
+			<td>
+				${scStudentVo.motherPhone}
+			</td>
+		</tr>
+		<tr>
+			<th width="200">父亲职业：</th>
+			<td>
+				${scStudentVo.fatherJob}
+			</td>
+		</tr>
+		<tr>
+			<th width="200">母亲职业：</th>
+			<td>
+				${scStudentVo.motherJob}
 			</td>
 		</tr>
 		<tr>
 			<th width="200">备注信息：</th>
 			<td>
-				${scTeacherVo.remarks}
+				${scStudentVo.remarks}
 			</td>
 		</tr>
 </body>

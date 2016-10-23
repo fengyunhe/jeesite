@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fengyunhe.school.modules.student.dao.ScStudentDao">
+    
+	<sql id="scStudentColumns">
+		a.id AS "id",
+		a.name AS "name",
+		a.st_no AS "stNo",
+		a.photo_url AS "photoUrl",
+		a.gender AS "gender",
+		a.id_no AS "idNo",
+		a.birthday AS "birthday",
+		a.wechat AS "wechat",
+		a.qq AS "qq",
+		a.father_name AS "fatherName",
+		a.mother_name AS "motherName",
+		a.father_phone AS "fatherPhone",
+		a.mother_phone AS "motherPhone",
+		a.father_job AS "fatherJob",
+		a.mother_job AS "motherJob",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="scStudentJoins">
+	</sql>
+    
+	<select id="get" resultType="ScStudent">
+		SELECT 
+			<include refid="scStudentColumns"/>
+		FROM sc_student a
+		<include refid="scStudentJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ScStudent">
+		SELECT 
+			<include refid="scStudentColumns"/>
+		FROM sc_student a
+		<include refid="scStudentJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="stNo != null and stNo != ''">
+				AND a.st_no = #{stNo}
+			</if>
+			<if test="gender != null and gender != ''">
+				AND a.gender = #{gender}
+			</if>
+			<if test="idNo != null and idNo != ''">
+				AND a.id_no = #{idNo}
+			</if>
+			<if test="birthday != null and birthday != ''">
+				AND a.birthday = #{birthday}
+			</if>
+			<if test="wechat != null and wechat != ''">
+				AND a.wechat = #{wechat}
+			</if>
+			<if test="qq != null and qq != ''">
+				AND a.qq = #{qq}
+			</if>
+			<if test="fatherName != null and fatherName != ''">
+				AND a.father_name = #{fatherName}
+			</if>
+			<if test="motherName != null and motherName != ''">
+				AND a.mother_name = #{motherName}
+			</if>
+			<if test="fatherPhone != null and fatherPhone != ''">
+				AND a.father_phone = #{fatherPhone}
+			</if>
+			<if test="motherPhone != null and motherPhone != ''">
+				AND a.mother_phone = #{motherPhone}
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND a.create_date = #{createDate}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ScStudent">
+		SELECT 
+			<include refid="scStudentColumns"/>
+		FROM sc_student a
+		<include refid="scStudentJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO sc_student(
+			<if test="id!=null">
+			id, 
+			</if>
+			<if test="name!=null">
+			name, 
+			</if>
+			<if test="stNo!=null">
+			st_no, 
+			</if>
+			<if test="photoUrl!=null">
+			photo_url, 
+			</if>
+			<if test="gender!=null">
+			gender, 
+			</if>
+			<if test="idNo!=null">
+			id_no, 
+			</if>
+			<if test="birthday!=null">
+			birthday, 
+			</if>
+			<if test="wechat!=null">
+			wechat, 
+			</if>
+			<if test="qq!=null">
+			qq, 
+			</if>
+			<if test="fatherName!=null">
+			father_name, 
+			</if>
+			<if test="motherName!=null">
+			mother_name, 
+			</if>
+			<if test="fatherPhone!=null">
+			father_phone, 
+			</if>
+			<if test="motherPhone!=null">
+			mother_phone, 
+			</if>
+			<if test="fatherJob!=null">
+			father_job, 
+			</if>
+			<if test="motherJob!=null">
+			mother_job, 
+			</if>
+			<if test="createBy.id!=null">
+			create_by, 
+			</if>
+			<if test="createDate!=null">
+			create_date, 
+			</if>
+			<if test="updateBy.id!=null">
+			update_by, 
+			</if>
+			<if test="updateDate!=null">
+			update_date, 
+			</if>
+			<if test="remarks!=null">
+			remarks, 
+			</if>
+			<if test="delFlag!=null">
+			del_flag
+			</if>
+
+ 		) VALUES (
+			<if test="id!=null">
+			#{id}, 
+			</if>
+			<if test="name!=null">
+			#{name}, 
+			</if>
+			<if test="stNo!=null">
+			#{stNo}, 
+			</if>
+			<if test="photoUrl!=null">
+			#{photoUrl}, 
+			</if>
+			<if test="gender!=null">
+			#{gender}, 
+			</if>
+			<if test="idNo!=null">
+			#{idNo}, 
+			</if>
+			<if test="birthday!=null">
+			#{birthday}, 
+			</if>
+			<if test="wechat!=null">
+			#{wechat}, 
+			</if>
+			<if test="qq!=null">
+			#{qq}, 
+			</if>
+			<if test="fatherName!=null">
+			#{fatherName}, 
+			</if>
+			<if test="motherName!=null">
+			#{motherName}, 
+			</if>
+			<if test="fatherPhone!=null">
+			#{fatherPhone}, 
+			</if>
+			<if test="motherPhone!=null">
+			#{motherPhone}, 
+			</if>
+			<if test="fatherJob!=null">
+			#{fatherJob}, 
+			</if>
+			<if test="motherJob!=null">
+			#{motherJob}, 
+			</if>
+			<if test="createBy.id!=null">
+			#{createBy.id}, 
+			</if>
+			<if test="createDate!=null">
+			#{createDate}, 
+			</if>
+			<if test="updateBy.id!=null">
+			#{updateBy.id}, 
+			</if>
+			<if test="updateDate!=null">
+			#{updateDate}, 
+			</if>
+			<if test="remarks!=null">
+			#{remarks}, 
+			</if>
+			<if test="delFlag!=null">
+			#{delFlag}
+			</if>
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sc_student SET 	
+				<if test="name!=null">
+			name = #{name}, 
+				</if>
+				<if test="stNo!=null">
+			st_no = #{stNo}, 
+				</if>
+				<if test="photoUrl!=null">
+			photo_url = #{photoUrl}, 
+				</if>
+				<if test="gender!=null">
+			gender = #{gender}, 
+				</if>
+				<if test="idNo!=null">
+			id_no = #{idNo}, 
+				</if>
+				<if test="birthday!=null">
+			birthday = #{birthday}, 
+				</if>
+				<if test="wechat!=null">
+			wechat = #{wechat}, 
+				</if>
+				<if test="qq!=null">
+			qq = #{qq}, 
+				</if>
+				<if test="fatherName!=null">
+			father_name = #{fatherName}, 
+				</if>
+				<if test="motherName!=null">
+			mother_name = #{motherName}, 
+				</if>
+				<if test="fatherPhone!=null">
+			father_phone = #{fatherPhone}, 
+				</if>
+				<if test="motherPhone!=null">
+			mother_phone = #{motherPhone}, 
+				</if>
+				<if test="fatherJob!=null">
+			father_job = #{fatherJob}, 
+				</if>
+				<if test="motherJob!=null">
+			mother_job = #{motherJob}, 
+				</if>
+				<if test="updateBy.id!=null">
+			update_by = #{updateBy.id}, 
+				</if>
+				<if test="updateDate!=null">
+			update_date = #{updateDate}, 
+				</if>
+				<if test="remarks!=null">
+			remarks = #{remarks}
+				</if>
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE sc_student SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

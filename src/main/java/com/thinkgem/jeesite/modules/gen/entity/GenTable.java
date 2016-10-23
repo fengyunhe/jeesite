@@ -18,7 +18,7 @@ import com.thinkgem.jeesite.common.utils.StringUtils;
  * @version 2013-10-15
  */
 public class GenTable extends DataEntity<GenTable> {
-	
+
 	private static final long serialVersionUID = 1L;
 	private String name; 	// 名称
 	private String comments;		// 描述
@@ -29,12 +29,12 @@ public class GenTable extends DataEntity<GenTable> {
 	private List<GenTableColumn> columnList = Lists.newArrayList();	// 表列
 
 	private String nameLike; 	// 按名称模糊查询
-	
+
 	private List<String> pkList; // 当前表主键列表
-	
+
 	private GenTable parent;	// 父表对象
 	private List<GenTable> childList = Lists.newArrayList();	// 子表列表
-	
+
 	public GenTable() {
 		super();
 	}
@@ -123,7 +123,7 @@ public class GenTable extends DataEntity<GenTable> {
 	public void setChildList(List<GenTable> childList) {
 		this.childList = childList;
 	}
-	
+
 	/**
 	 * 获取列名和说明
 	 * @return
@@ -166,7 +166,7 @@ public class GenTable extends DataEntity<GenTable> {
 		}
 		return importList;
 	}
-	
+
 	/**
 	 * 是否存在父类
 	 * @return
@@ -187,7 +187,7 @@ public class GenTable extends DataEntity<GenTable> {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * 是否存在update_date列
 	 * @return
@@ -236,6 +236,12 @@ public class GenTable extends DataEntity<GenTable> {
 			}
 		}
 		return editColumnList;
+	}
+
+	@Override
+	public void preInsert() {
+		genUuid = true;
+		super.preInsert();
 	}
 }
 

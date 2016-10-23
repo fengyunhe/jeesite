@@ -42,7 +42,7 @@
 		<#list table.columnList as c>
 			<#if c.isEdit?? && c.isEdit == "1" && (c.isNotBaseField || c.simpleJavaField == 'remarks')>
 		<tr>
-			<th>${c.comments}：</th>
+			<th width="200">${c.comments}：</th>
 			<td>
 			<#if c.showType == "input">
 				${"$"}{${className}Vo.${c.javaFieldId}}
