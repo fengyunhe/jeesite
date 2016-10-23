@@ -69,11 +69,6 @@
 			<li><label>母亲电话：</label>
 				<form:input path="motherPhone" htmlEscape="false" maxlength="11" class="input-medium"/>
 			</li>
-			<li><label>创建时间：</label>
-				<input name="createDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
-					value="<fmt:formatDate value="${scStudentVo.createDate}" pattern="yyyy-MM-dd"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
-			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>
@@ -93,6 +88,7 @@
 				<th>母亲姓名</th>
 				<th>父亲电话</th>
 				<th>母亲电话</th>
+				<th>创建时间</th>
 				<th>更新时间</th>
 				<th>备注信息</th>
 				<shiro:hasPermission name="student:scStudent:edit"><th>操作</th></shiro:hasPermission>
@@ -154,6 +150,11 @@
 				<td>
 				
 					${vo.motherPhone}
+				
+				</td>
+				<td>
+				
+					<fmt:formatDate value="${vo.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				
 				</td>
 				<td>

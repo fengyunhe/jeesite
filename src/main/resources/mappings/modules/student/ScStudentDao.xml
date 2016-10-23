@@ -80,9 +80,6 @@
 			<if test="motherPhone != null and motherPhone != ''">
 				AND a.mother_phone = #{motherPhone}
 			</if>
-			<if test="createDate != null and createDate != ''">
-				AND a.create_date = #{createDate}
-			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
