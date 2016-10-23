@@ -1,466 +1,126 @@
 <!DOCTYPE html>
 <html>
-  <head>
-	<meta charset='utf-8'>
-	<title>JeeSite是一个开源的企业信息化快速开发平台，Java企业应用开源框架，Java EE（J2EE）快速开发框架，使用经典技术组合（Spring、Spring MVC、MyBatis、Bootstrap UI），包括核心模块如：组织机构、用户、权限授权、内容管理、工作流等。</title>
-	<meta name="description" content="JeeSite是一个开源的企业信息化快速开发平台，Java企业应用开源框架，Java EE（J2EE）快速开发框架，使用经典技术组合（Spring、Spring MVC、MyBatis、Bootstrap UI），包括核心模块如：组织机构、用户、权限授权、内容管理、工作流等。" />
-	<meta name="keywords" content="JeeSite是一个开源的企业信息化快速开发平台，Java企业应用开源框架，Java EE（J2EE）快速开发框架，使用经典技术组合（Spring、Spring MVC、MyBatis、Bootstrap UI），包括核心模块如：组织机构、用户、权限授权、内容管理、工作流等。" />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-	<style type="text/css">strong, th{font-weight:bold;}</style>
-    <!--[if lt IE 9]><script src="javascripts/html5.js"></script><![endif]-->	
-    <!-- Baidu tongji analytics --><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src="//hm.baidu.com/hm.js?16aac408f1e40ae4a6897f78424f1a0c";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm,s);})();</script>
-	<link rel="stylesheet" href="css/releasenotes.plugin.css">
-	<script src="js/libs/jquery-1.7.1.min.js"></script>
-	<script src="js/libs/marked.js"></script>
-	<script src="js/releasenotes.js"></script>
-	<!-- Release notes --><script>
-		$(document).ready(function() {
-			$("#releaseNotesContainer").releaseNotes({
-				milestonesShown		: 10,
-				// If you want to show private repo
-				// You need to add repo credentials in api.php
-				phpApi 				: false,
-				phpApiPath			: '/',
-				showDescription 	: true,
-				showComments 		: true,
-				// Used if phpAPI is false
-	     		repo		        : 'jeesite',
-	     		username       		: 'thinkgem'
-			});
-		});
-	</script>
-  </head>
-  <body>
-  
-  <script type="text/javascript" src="release.html"></script>
-  
-    <header>
-      <div class="inner">
-        <h1>JeeSite</h1>
-        <h2>企业信息化快速开发平台</h2>
-        <a href="http://thinkgem.iteye.com/" class="button" target="_blank">
-          <small>ITeye Blog</small>
-          ThinkGem
+<head>
+    <meta charset='utf-8'>
+    <title>fengyunhe/school,本项目基于Jeesite项目，为一款学校用的信息管理系统</title>
+    <meta name="description" content="本项目基于Jeesite项目，为一款学校用的信息管理系统"/>
+    <meta name="keywords" content="风云合,school"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print"/>
+    <style type="text/css">strong, th {
+        font-weight: bold;
+    }</style>
+    <!--[if lt IE 9]>
+    <script src="javascripts/html5.js"></script><![endif]-->
+    <!-- Baidu tongji analytics -->
+    <script>var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?16aac408f1e40ae4a6897f78424f1a0c";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();</script>
+    <link rel="stylesheet" href="css/releasenotes.plugin.css">
+    <script src="js/libs/jquery-1.7.1.min.js"></script>
+    <script src="js/libs/marked.js"></script>
+    <script src="js/releasenotes.js"></script>
+    <!-- Release notes -->
+    <script>
+        $(document).ready(function () {
+            $("#releaseNotesContainer").releaseNotes({
+                milestonesShown: 10,
+                // If you want to show private repo
+                // You need to add repo credentials in api.php
+                phpApi: false,
+                phpApiPath: '/',
+                showDescription: true,
+                showComments: true,
+                // Used if phpAPI is false
+                repo: 'jeesite',
+                username: 'thinkgem'
+            });
+        });
+    </script>
+
+    <style>
+#upgrade_log_table td{
+    text-align: left;
+}
+    </style>
+</head>
+<body>
+
+<script type="text/javascript" src="release.html"></script>
+
+<header>
+    <div class="inner">
+        <h1>School</h1>
+        <h2>学校教育管理系统 ， 基于 <a style="color:#fff;" href="http://git.oschina.net/thinkgem/jeesite">JeeSite</a>二次开发</h2>
+        <a href="http://www.fengyunhe.com/" class="button" target="_blank">
+            <small>风云合</small>
+            yangyan
         </a>
-      </div>
-    </header>
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">	
+    </div>
+</header>
+<div id="content-wrapper">
+    <div class="inner clearfix">
+        <section id="main-content">
 
-<p>
-	
-	<h2 >
-		<a href="#平台简介"></a><span style="background-color:;">平台简介</span>
-	</h2>
-	<p style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<span style="background-color:;">JeeSite是基于多个优秀的开源项目，高度整合封装而成的高效，高性能，强安全性的<strong>开源</strong>Java EE快速开发平台。</span>
-	</p>
-	<p style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<span style="background-color:;">JeeSite是您快速完成项目的最佳基础平台解决方案，JeeSite是您想学习Java平台的最佳学习案例，JeeSite还是接私活的最佳助手。</span>
-	</p>
-	<p style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<span style="background-color:;">JeeSite是在Spring Framework基础上搭建的一个Java基础开发平台，以Spring MVC为模型视图控制器，MyBatis为数据访问层，
-Apache Shiro为权限授权层，Ehcahe对常用数据进行缓存，Activit为工作流引擎。是JavaEE界的最佳整合。</span>
-	</p>
-	<p style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<span style="background-color:;">JeeSite主要定位于企业信息化领域，已内置企业信息化系统的基础功能和高效的<strong>代码生成</strong>工具， 包括：系统权限组件、数据权限组件、数据字典组件、核心工具组件、视图操作组件、工作流组件、代码生成等。 前端界面风格采用了结构简单、性能优良、页面美观大气的Twitter Bootstrap页面展示框架。 采用分层设计、双重验证、提交数据安全编码、密码加密、访问验证、数据权限验证。 使用Maven做项目管理，提高项目的易开发性、扩展性。</span>
-	</p>
-	<p style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<span style="background-color:;">JeeSite目前包括以下三大模块，系统管理（SYS）模块、 内容管理（CMS）模块、在线办公（OA）模块、代码生成（GEN）模块。&nbsp;</span><strong><span style="background-color:;">系统管理模块</span></strong><span style="background-color:;">，包括企业组织架构（用户管理、机构管理、区域管理）、 菜单管理、角色权限管理、字典管理等功能；&nbsp;</span><strong><span style="background-color:;">内容管理模块</span></strong><span style="background-color:;">&nbsp;，包括内容管理（文章、链接），栏目管理、站点管理、 公共留言、文件管理、前端网站展示等功能；&nbsp;</span><strong><span style="background-color:;">在线办公模块</span></strong><span style="background-color:;">&nbsp;，提供简单的请假流程实例。</span>，提供简单的请假流程实例；<strong><span style="background-color:;">代码生成模块</span></strong> ，完成重复的工作
-	</p>
-	<p style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<span style="background-color:;">JeeSite 提供了常用工具进行封装，包括日志工具、缓存工具、服务器端验证、数据字典、当前组织机构数据 （用户、机构、区域）以及其它常用小工具等。另外还提供一个强大的在线&nbsp;</span><strong><span style="background-color:;">代码生成</span></strong><span style="background-color:;">&nbsp;工具， 此工具提供简单的单表、一对多、树结构功能的生成，如果对外观要求不是很高，生成的功能就可以用了。 如果你使用了JeeSite基础框架，就可以很高效的快速开发出，优秀的信息管理系统。</span>
-	</p>
-	<h2 >
-		<a href="#内置功能"></a><span style="background-color:;">内置功能</span>
-	</h2>
-	<ol style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<li>
-			<span style="background-color:;">用户管理：用户是系统操作者，该功能主要完成系统用户配置。</span>
-		</li>
-		<li>
-			<span style="background-color:;">机构管理：配置系统组织机构（公司、部门、小组），树结构展现，可随意调整上下级。</span>
-		</li>
-		<li>
-			<span style="background-color:;">区域管理：系统城市区域模型，如：国家、省市、地市、区县的维护。</span>
-		</li>
-		<li>
-			<span style="background-color:;">菜单管理：配置系统菜单，操作权限，按钮权限标识等。</span>
-		</li>
-		<li>
-			<span style="background-color:;">角色管理：角色菜单权限分配、设置角色按机构进行数据范围权限划分。</span>
-		</li>
-		<li>
-			<span style="background-color:;">字典管理：对系统中经常使用的一些较为固定的数据进行维护，如：是否、男女、类别、级别等。</span>
-		</li>
-		<li>
-			<span style="background-color:;">操作日志：系统正常操作日志记录和查询；系统异常信息日志记录和查询。</span>
-		</li>
-		<li>
-			<span style="background-color:;">连接池监视：监视当期系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。</span>
-		</li>
-		<li>
-			<span style="background-color:;">工作流引擎：实现业务工单流转、在线流程设计器。</span>
-		</li>
-	</ol>
-	<h2 >
-		<a href="#为何选择jeesite"></a><span style="background-color:;">为何选择JeeSite</span>
-	</h2>
-	<ol style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<li>
-			<span style="background-color:;">使用&nbsp;</span><a href="http://www.apache.org/licenses/LICENSE-2.0"><span style="background-color:;">Apache License 2.0</span></a><span style="background-color:;">&nbsp;协议，源代码完全开源，无商业限制。</span>
-		</li>
-		<li>
-			<span style="background-color:;">使用目前主流的Java EE开发框架，简单易学，学习成本低。</span>
-		</li>
-		<li>
-			<span style="background-color:;">数据库无限制，目前支持MySql、Oracle，可扩充SQL Server、PostgreSQL、H2等。</span>
-		</li>
-		<li>
-			<span style="background-color:;">模块化设计，层次结构清晰。内置一系列企业信息管理的基础功能。</span>
-		</li>
-		<li>
-			<span style="background-color:;">操作权限控制精密细致，对所有管理链接都进行权限验证，可控制到按钮。</span>
-		</li>
-		<li>
-			<span style="background-color:;">数据权限控制精密细致，对指定数据集权限进行过滤，七种数据权限可供选择。</span>
-		</li>
-		<li>
-			<span style="background-color:;">提供在线功能代码生成工具，提高开发效率及质量。</span>
-		</li>
-		<li>
-			<span style="background-color:;">提供常用工具类封装，日志、缓存、验证、字典、组织机构等，常用标签（taglib），获取当前组织机构、字典等数据。</span>
-		</li>
-		<li>
-			<span style="background-color:;">兼容目前最流行浏览器（IE7+、Chrome、Firefox）IE6也支持，但体验效果差。</span>
-		</li>
-	</ol>
-	<h2 >
-		<a href="#技术选型"></a><span style="background-color:;">技术选型</span>
-	</h2>
-	<p style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<span style="background-color:;">1、后端</span>
-	</p>
-	<ul style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<li>
-			<span style="background-color:;">核心框架：Spring Framework 4.1</span>
-		</li>
-		<li>
-			<span style="background-color:;">安全框架：Apache Shiro 1.2</span>
-		</li>
-		<li>
-			<span style="background-color:;">视图框架：Spring MVC 4.1</span>
-		</li>
-		<li>
-			<span style="background-color:;">服务端验证：Hibernate Validator 5.2</span>
-		</li>
-		<li>
-			<span style="background-color:;">布局框架：SiteMesh 2.4</span>
-		</li>
-		<li>
-			<span style="background-color:;">工作流引擎：Activiti 5.21</span>
-		</li>
-		<li>
-			<span style="background-color:;">任务调度：Spring Task 4.1</span>
-		</li>
-		<li>
-			<span style="background-color:;">持久层框架：MyBatis 3.2</span>
-		</li>
-		<li>
-			<span style="background-color:;">数据库连接池：Alibaba Druid 1.0</span>
-		</li>
-		<li>
-			<span style="background-color:;">缓存框架：Ehcache 2.6、Redis</span>
-		</li>
-		<li>
-			<span style="background-color:;">日志管理：SLF4J 1.7、Log4j</span>
-		</li>
-		<li>
-			<span style="background-color:;">工具类：Apache Commons、Jackson 2.2、Xstream 1.4、Dozer 5.3、POI 3.9</span>
-		</li>
-	</ul>
-	<p style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<span style="background-color:;">2、前端</span>
-	</p>
-	<ul style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<li>
-			<span style="background-color:;">JS框架：jQuery 1.9。</span>
-		</li>
-		<li>
-			<span style="background-color:;">CSS框架：Twitter Bootstrap 2.3.1（稳定是后台，UI方面根据需求自己升级改造吧）。</span>
-		</li>
-		<li>
-			<span style="background-color:;">客户端验证：JQuery Validation Plugin 1.11。</span>
-		</li>
-		<li>
-			<span style="background-color:;">富文本在线编辑：CKEditor</span>
-		</li>
-		<li>
-			<span style="background-color:;">在线文件管理：CKFinder</span>
-		</li>
-		<li>
-			<span style="background-color:;">动态页签：Jerichotab</span>
-		</li>
-		<li>
-			<span style="background-color:;">手机端框架：Jingle</span>
-		</li>
-		<li>
-			<span style="background-color:;">数据表格：jqGrid</span>
-		</li>
-		<li>
-			<span style="background-color:;">对话框：jQuery jBox</span>
-		</li>
-		<li>
-			<span style="background-color:;">下拉选择框：jQuery Select2</span>
-		</li>
-		<li>
-			<span style="background-color:;">树结构控件：jQuery zTree</span>
-		</li>
-		<li>
-			<span style="background-color:;">日期控件： My97DatePicker</span>
-		</li>
-	</ul>
-	<p style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<span style="background-color:;">4、平台</span>
-	</p>
-	<ul style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<li>
-			<span style="background-color:;">服务器中间件：在Java EE 5规范（Servlet 2.5、JSP 2.1）下开发，支持应用服务器中间件 有Tomcat 6+、Jboss 7+、WebLogic 10+、WebSphere 8+。</span>
-		</li>
-		<li>
-			<span style="background-color:;">数据库支持：目前仅提供MySql或Oracle数据库的支持，但不限于数据库，平台留有其它数据库支持接口， 你可以很方便的更改为其它数据库，如：SqlServer 2008、MySql 5.5、H2等</span>
-		</li>
-		<li>
-			<span style="background-color:;">开发环境：Java、Eclipse Java EE 4.3、Maven 3.1、Git</span>
-		</li>
-	</ul>
-	<h2 >
-		<a href="#安全考虑"></a><span style="background-color:;">安全考虑</span>
-	</h2>
-	<ol style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<li>
-			<span style="background-color:;">开发语言：系统采用Java 语言开发，具有卓越的通用性、高效性、平台移植性和安全性。</span>
-		</li>
-		<li>
-			<span style="background-color:;">分层设计：（数据库层，数据访问层，业务逻辑层，展示层）层次清楚，低耦合，各层必须通过接口才能接入并进行参数校验（如：在展示层不可直接操作数据库），保证数据操作的安全。</span>
-		</li>
-		<li>
-			<span style="background-color:;">双重验证：用户表单提交双验证：包括服务器端验证及客户端验证，防止用户通过浏览器恶意修改（如不可写文本域、隐藏变量篡改、上传非法文件等），跳过客户端验证操作数据库。</span>
-		</li>
-		<li>
-			<span style="background-color:;">安全编码：用户表单提交所有数据，在服务器端都进行安全编码，防止用户提交非法脚本及SQL注入获取敏感数据等，确保数据安全。</span>
-		</li>
-		<li>
-			<span style="background-color:;">密码加密：登录用户密码进行SHA1散列加密，此加密方法是不可逆的。保证密文泄露后的安全问题。</span>
-		</li>
-		<li>
-			<span style="background-color:;">强制访问：系统对所有管理端链接都进行用户身份权限验证，防止用户</span>
-		</li>
-	</ol>
-	<h2 >
-		<a href="#快速体验"></a><span style="background-color:;">快速体验</span>
-	</h2>
-	<ol style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<li>
-			<span style="background-color:;">具备运行环境：JDK1.6+、Maven3.0+、MySql5+或Oracle10g+。</span>
-		</li>
-		<li>
-			<span style="background-color:;">修改src\main\resources\jeesite.properties文件中的数据库设置参数。</span>
-		</li>
-		<li>
-			<span style="background-color:;">根据修改参数创建对应MySql或Oracle数据库用户和参数。</span>
-		</li>
-		<li>
-			<span style="background-color:;">运行bin\init-db.bat脚本，即可导入表结构及演示数据(linux操作系统：在控制台中切换至项目根目录，运行命令：mvn antrun:run -Pinit-db)</span>
-		</li>
-		<li>
-			<span style="background-color:;">运行bin\run-tomcat7.bat或bin\run-jetty.bat，启动Web服务器（第一次运行，需要下载依赖jar包，请耐心等待）。</span>
-		</li>
-		<li>
-			<span style="background-color:;">最高管理员账号，用户名：thinkgem 密码：admin</span>
-		</li>
-	</ol>
-	<h2 >
-		<a href="#常见问题"></a><span style="background-color:;">常见问题</span>
-	</h2>
-	<ol style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<li>
-			<span style="background-color:;">用一段时间提示内存溢出，请修改JVM参数：-Xmx512m -XX:MaxPermSize=256m</span>
-		</li>
-		<li>
-			<span style="background-color:;">有时出现文字乱码：修改Tomcat的server.xml文件的Connector项，增加URIEncoding="UTF-8"</span>
-		</li>
-		<li>
-			<span style="background-color:;">为什么新建菜单后看不到新建的菜单？因为授权问题，菜单管理只允许最高管理员账号管理（最高管理员默认账号：thinkgem 密码：admin）。</span>
-		</li>
-	</ol>
-	<h2 >
-		<a href="#更多文档"></a><span style="background-color:;">更多文档</span>
-	</h2>
-	<ul style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<li>
-			<a href="https://github.com/thinkgem/jeesite/tree/master/doc"><span style="background-color:;">https://github.com/thinkgem/jeesite/tree/master/doc</span></a>
-		</li>
-	</ul>
-	<h2 >
-		<a href="#如何交流-反馈-参与贡献-"></a><span style="background-color:;">如何交流、反馈、参与贡献？</span>
-	</h2>
-	<ul style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<li>
-			<span style="background-color:;">QQ群：127515876 &nbsp; 209330483 &nbsp; 223507718 &nbsp; 苹果版QQ若不能加入请使用手机QQ最新版</span>
-		</li><!--
-		<li>
-			<span style="background-color:;">E-mail：</span><a href="mailto:thinkgem@163.com"><span style="background-color:;">thinkgem@163.com</span></a>
-		</li>-->
-		<li>
-			<span style="background-color:;">GitHub：</span><a href="https://github.com/thinkgem/jeesite"><span style="background-color:;">https://github.com/thinkgem/jeesite</span></a>
-		</li>
-		<li>
-			<span style="background-color:;">开源中国：</span><a href="http://git.oschina.net/thinkgem/jeesite"><span style="background-color:;">http://git.oschina.net/thinkgem/jeesite</span></a>
-		</li>
-		<li>
-			<span style="background-color:;">论坛交流：</span><a href="http://www.jeesite.net" target="_blank"><span style="background-color:;">http://www.jeesite.net</span></a>
-		</li>
-		<li>
-			<span style="background-color:;">支持JeeSite发展：</span> 支付宝：thinkgem@163.com &nbsp; 微信：thinkgem
-		</li>
-	</ul>
-	<p style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<span style="background-color:;">一个人的个人能力再强，也无法战胜一个团队，希望兄弟姐妹的支持，能够贡献出自己的部分代码，参与进来共同完善它(</span><span style="font-size:12px;line-height:0;vertical-align:baseline;"><span style="background-color:;">_</span><span style="line-height:0;vertical-align:baseline;">)。</span></span>
-	</p>
-	<p style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<span style="background-color:;">怎么共享我的代码：</span><a href="http://www.cnblogs.com/wenber/p/3630921.html"><span style="background-color:;">手把手教你如何加入到github的开源世界！</span></a>
-	</p>
-	<h2 >
-		<a href="#版权声明"></a><span style="background-color:;">版权声明</span>
-	</h2>
-	<p style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<span style="background-color:;">本软件使用&nbsp;</span><a href="http://www.apache.org/licenses/LICENSE-2.0"><span style="background-color:;">Apache License 2.0</span></a><span style="background-color:;">&nbsp;协议，请严格遵照协议内容：</span>
-	</p>
-	<ol style="margin-left:0px;color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<li>
-			<span style="background-color:;">需要给代码的用户一份Apache Licence。</span>
-		</li>
-		<li>
-			<span style="background-color:;">如果你修改了代码，需要在被修改的文件中说明。</span>
-		</li>
-		<li>
-			<strong><span style="background-color:;">在延伸的代码中（修改和有源代码衍生的代码中）需要带有原来代码中的协议，商标，专利声明和其他原来作者规定需要包含的说明。</span></strong>
-		</li>
-		<li>
-			<span style="background-color:;">如果再发布的产品中包含一个Notice文件，则在Notice文件中需要带有Apache Licence。你可以在Notice中增加自己的许可，但不可以表现为对Apache Licence构成更改。</span>
-		</li>
-		<li>
-			<span style="background-color:;">Apache Licence也是对商业应用友好的许可。使用者也可以在需要的时候修改代码来满足需要并作为开源或商业产品发布/销售</span>
-		</li>
-		<li>
-			<span style="background-color:;">你可以二次包装出售，<strong><span style="background-color:;">但还请保留文件中的版权和作者信息</span></strong>，并在你的产品说明中注明JeeSite。</span>
-		</li>
-		<li>
-			<span style="background-color:;">你可以以任何方式获得，你可以修改包名或类名，<strong><span style="background-color:;">但还请保留文件中的版权和作者信息</span></strong>。</span>
-		</li>
-	</ol>
-	<h2 >
-		<a href="#为何使用mybatis"></a><span style="background-color:;">为何使用MyBatis</span>
-	</h2>
-	<ul style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<li>
-			<p>
-				<span style="background-color:;">学习成本：Hibernate的真正掌握要比Mybatis来得难不少。Mybatis框架相对简单很容易上手，也更加灵活。 对于学习过Hibernate的用户，学习起MyBatis也更容易上手。</span>
-			</p>
-		</li>
-		<li>
-			<p>
-				<span style="background-color:;">开发成本：大家都说Hibernate开发效率高，个人认为MyBatis的开发效率并不比Hibernate低， 通过代码生成器和封装开发效率不是问题，并且MyBatis可控性比较高，并更易于维护。</span>
-			</p>
-		</li>
-		<li>
-			<p>
-				<span style="background-color:;">性能方面：由于Hibernate比较难以掌握，性能方面也成为了Hibernate的问题瓶颈，当然如果你对Hibernate非常熟， Hibernate性能上定不是问题。但对于大多数情况下，真正掌握Hibernate的人少之又少，然而的也就造就了项目风险加大。</span>
-			</p>
-		</li>
-		<li>
-			<p>
-				<span style="background-color:;">多数据库支持：有些人说MyBatis对多数据库支持困难，我认为这个不是问题，虽说目前JeeSite仅提供对MySql和Oracle 数据库的支持，但对于支持其它数据库的改动也不是很麻烦，SQL是被专门写在XML中，对于大多数SQL来说都是通用的， 对于不同的数据库可通过dbName区分和修改各别的SQL片段即可。</span>
-			</p>
-		</li>
-	</ul>
-	<p style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<span style="background-color:;">上述纯属个人观点，欢迎指正（</span><a href="mailto:thinkgem@163.com"><span style="background-color:;">thinkgem@163.com</span></a><span style="background-color:;">）。</span>
-	</p>
-	<p style="color:rgba(0, 0, 0, 0.8);font-family:Lato, 'Helvetica Neue', 'Microsoft YaHei', Arial, Helvetica, sans-serif;font-size:15px;background-color:">
-		<span style="background-color:;">如果你仍然喜欢Hibernate，请点击</span><a href="https://github.com/thinkgem/jeesite/tree/master_hibernate"><span style="background-color:;">下载JeeSite Hibernate版本</span></a><span style="background-color:;">。</span>
-	</p>
-	<h2>谢谢支持</h2>
-	<p>每一个访问到这个页面的人，一定也是同样对技术有所追求的人。我们需要您的支持、鼓励，以及对我们所做成果的认可。如果您已经在使用JeeSite并为您创造了价值，请多多支持JeeSite吧，有了您的支持JeeSite才会走的更远更好，谢谢您的慷慨解囊！</p>
-	<p> 
-	  <strong style="margin-left:85px;">微信扫码捐赠:</strong>
-	  <strong style="margin-left:200px;">支付宝扫描捐赠:</strong><br/>
-	  <img src="images/thinkgem_wx.png" width="200" height="200" style="margin-left:80px;" />	
-	  <img src="images/thinkgem_ali.png" width="200" height="200" style="margin-left:100px;"/>
-	  <form action="https://shenghuo.alipay.com/send/payment/fill.htm" method="post" target="_blank">
-	    <!--<input type="hidden" name="optEmail" value="thinkgem@163.com">
-	    <input type="hidden" name="payAmount" value="1">
-	    使用支付钱包扫描二维码，或者点击&nbsp; &nbsp;
-	    <input style="height: 20px" type="image" src="images/alipay.jpg" border="0" name="submit" title="ThinkGem感谢您的捐赠，支付宝账号：thinkgem@163.com" alt="支付宝捐赠">
-		&nbsp; &nbsp;图片，进行支付宝电脑端捐赠。&nbsp;-->★ 捐赠时请加我为好友（提供捐赠名称及金额），优先提供技术支持，谢谢！( ^_^ )
-	  </form>
-	</p>
+            <h1>介绍</h1>
+            <p>School 是一款基于jeesite开发的学校教育管理系统</p>
 
-<h2 onclick="location='release.html'" style="cursor:pointer">Release Notes</h2>
-<div id="releaseNotesContainer" role="main"></div>
-		
+            <p>
+                目前正在开发中，对于jeesite的增强功能会单独的放入到base分支中，便于以后pull request，学校的功能模块开发会放到school分支下。如果有意共同开发和维护，欢迎加群 345067699。
+            </p>
+
+            <h2>快速开发平台增强功能</h2>
+            <ul>
+                <li>代码生成模块：区分单文件多文件类型字段，优化生成的列表和form页对文件的显示</li>
+                <li>代码生成模块：区分日期和日期时间类型，优化列表页，form页面显示</li>
+                <li>代码生成模块：增加单图片，多图片字段类型，使用fancyBox优化在列表中图片的显示</li>
+                <li>代码生成模块：增加生成Vo对象，修改Service、Controller、页面中使用生成后使用Vo对象，便于详细开发时在Vo中扩展返回属性</li>
+                <li>代码生成模块：增加查看页面生成，列表的第一列链接修改为进入查看页面</li>
+            </ul>
+
+            <h2>学校系统功能列表</h2>
+            <ul>
+                <li>教师信息管理</li>
+                <li>学生信息管理</li>
+                <li>教育资产管理</li>
+                <li>班级管理</li>
+            </ul>
+
+            <h2>更新日志：</h2>
+
+
+            <h3>2016年10月23日</h3>
+            <ul>
+                <li>初次提交代码</li>
+                <li>代码生成模块：区分单文件多文件类型字段，优化生成的列表和form页对文件的显示</li>
+                <li>代码生成模块：区分日期和日期时间类型，优化列表页，form页面显示</li>
+                <li>代码生成模块：增加单图片，多图片字段类型，使用fancyBox优化在列表中图片的显示</li>
+                <li>代码生成模块：增加生成Vo对象，修改Service、Controller、页面中使用生成后使用Vo对象，便于详细开发时在Vo中扩展返回属性</li>
+                <li>代码生成模块：增加查看页面生成，列表的第一列链接修改为进入查看页面</li>
+            </ul>
+
         </section>
 
         <aside id="sidebar">
-          <a href="https://github.com/thinkgem/jeesite/archive/master.zip" class="button">
-            <small>JeeSite 源码下载</small>
-            Download
-          </a>
-          <a href="https://github.com/thinkgem/jeesite/tree/master/doc" class="button">
-            <small>JeeSite 入门文档</small>
-            Help doc
-          </a>
-          <a href="https://github.com/thinkgem/jeesite" class="button" target="_blank">
-            <small>JeeSite 版本仓库</small>
-            Git Repo
-          </a>
-          <a href="http://demo.jeesite.com/jeesite" class="button" target="_blank">
-            <small>JeeSite 演示地址</small>
-            Demo Addr
-          </a>
-		  <p>
-		  	<strong style="padding:10px;">加我微信:</strong>
-		    <img src="images/weixin.png" width="185" height="185" style="padding:8px"/>
-		    <strong style="padding:10px;">微信扫描捐赠:</strong>
-		    <img src="images/thinkgem_wx.png" width="185" height="185" style="padding:8px"/>
-		    <strong style="padding:10px;">支付宝扫描捐赠:</strong>
-		    <img src="images/thinkgem_ali.png" width="185" height="185" style="padding:8px"/>
-			★ 捐赠时请加我为好友（提供捐赠名称及金额），优先提供技术支持，谢谢！( ^_^ )
-		  </p>
-          <p class="repo-owner"><a href="http://jeesite.com">JeeSite</a> is maintained by <a href="http://thinkgem.iteye.com/" target="_blank">thinkgem</a>.</p>
-            <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
-                <a class="bds_qzone"></a>
-                <a class="bds_tsina"></a>
-                <a class="bds_tqq"></a>
-                <a class="bds_renren"></a>
-                <a class="bds_t163"></a>
-                <span class="bds_more">更多</span>
-                <a class="shareCount"></a>
+            <a href="https://github.com/fengyunhe/school" class="button">
+                <small>源码仓库</small>
+                Download
+            </a>
+
+            <div style="text-align: center;">
+                <h1 style="font-size:150%;font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;">微信打赏二维码️</h1>
+                <img style="max-width:100%;;" src="images/weixin_money.jpg" />
+                <p>您的支持就是我们的动力</p>
             </div>
-            <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=508120" ></script>
-            <script type="text/javascript" id="bdshell_js"></script>
-            <script type="text/javascript">
-                document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
-            </script><br/>
-          </p>
-          <p>This page was generated by <a href="http://pages.github.com" target="_blank">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong" target="_blank">Jason Long</a>.</p>
         </aside>
-      </div>
     </div>
-  </body>
+</div>
+</body>
 </html>
