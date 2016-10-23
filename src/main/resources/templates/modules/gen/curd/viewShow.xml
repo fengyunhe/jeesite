@@ -10,9 +10,23 @@
 <head>
 	<title>${functionNameSimple}管理</title>
 	<meta name="decorator" content="default"/>
+	<!-- Add fancyBox -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+    <style>
+    	.imagelink img{
+    		max-height:100px
+    	}
+    </style>
 	<script type="text/javascript">
 		$(document).ready(function() {
-
+            $('.imagelink').fancybox({
+                  helpers: {
+                      title : {
+                          type : 'float'
+                      }
+                  }
+            });
 		});
 	</script>
 </head>
@@ -61,6 +75,14 @@
 				    <c:forEach var ="f" items="${"$"}{fn:split(${className}Vo.${c.javaFieldId},'|')}" varStatus="current">
 				    	<c:if test="${"$"}{!empty f}">
 				    	<a href='${"$"}{f}' target="_blank">文件 ${"$"}{current.index+1}</a>
+				    	</c:if>
+				    </c:forEach>
+			<#elseif c.showType == "image">
+				    <a href='${"$"}{${className}Vo.${c.javaFieldId}}' target="_blank" class="imagelink" title=""><img src='${"$"}{${className}Vo.${c.javaFieldId}}' /></a>
+			<#elseif c.showType == "images">
+				    <c:forEach var ="f" items="${"$"}{fn:split(vo.${c.javaFieldId},'|')}" varStatus="current">
+				    	<c:if test="${"$"}{!empty f}">
+				    	<a href='${"$"}{f}' target="_blank" class="imagelink"><img src='${"$"}{f}' /></a>
 				    	</c:if>
 				    </c:forEach>
 			<#else>

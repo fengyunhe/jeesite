@@ -4,9 +4,23 @@
 <head>
 	<title>教师信息管理</title>
 	<meta name="decorator" content="default"/>
+	<!-- Add fancyBox -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+    <style>
+    	.imagelink img{
+    		max-height:100px
+    	}
+    </style>
 	<script type="text/javascript">
 		$(document).ready(function() {
-
+            $('.imagelink').fancybox({
+                  helpers: {
+                      title : {
+                          type : 'float'
+                      }
+                  }
+            });
 		});
 	</script>
 </head>
@@ -42,7 +56,7 @@
 		<tr>
 			<th>头像：</th>
 			<td>
-					${scTeacherVo.photoUrl}
+				    <a href='${scTeacherVo.photoUrl}' target="_blank" class="imagelink" title=""><img src='${scTeacherVo.photoUrl}' /></a>
 			</td>
 		</tr>
 		<tr>
