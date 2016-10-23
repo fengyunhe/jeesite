@@ -39,6 +39,8 @@
 			<#elseif c.showType == "radiobox">
 				${"$"}{fns:getDictLabel(${className}.${c.javaFieldId},'${c.dictType}' ,null)}
 			<#elseif c.showType == "dateselect">
+				<fmt:formatDate value="${"$"}{${className}.${c.javaFieldId}}" pattern="yyyy-MM-dd"/>
+			<#elseif c.showType == "datetimeselect">
 				<fmt:formatDate value="${"$"}{${className}.${c.javaFieldId}}" pattern="yyyy-MM-dd HH:mm:ss"/>
 			<#elseif c.showType == "userselect">
 
