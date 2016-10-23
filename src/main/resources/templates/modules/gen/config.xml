@@ -80,5 +80,7 @@
 		<dict value="treeselect" label="树选择控件"/>
 		<dict value="fileselect" label="单文件上传选择"/>
 		<dict value="fileselects" label="多文件上传选择"/>
+		<dict value="image" label="单图片上传选择"/>
+		<dict value="images" label="多图片上传选择"/>
 	</showType>
 </config>

@@ -1,6 +1,6 @@
 /*!
  * Copyright &copy; 2012-2016 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
- * 
+ *
  * 通用公共方法
  * @author ThinkGem
  * @version 2014-4-29
@@ -12,7 +12,9 @@ $(document).ready(function() {
 			if(this.blur) {this.blur()};
 		});
 		//所有下拉框使用select2
-		$("select").select2();
+		$("select").select2({
+            allowClear: true
+        });
 	}catch(e){
 		// blank
 	}
@@ -40,7 +42,7 @@ function getQueryString(name, url) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     if (!url || url == ""){
 	    url = window.location.search;
-    }else{	
+    }else{
     	url = url.substring(url.indexOf("?"));
     }
     r = url.substr(1).match(reg)
@@ -80,7 +82,7 @@ function closeTip(){
 function showTip(mess, type, timeout, lazytime){
 	resetTip();
 	setTimeout(function(){
-		top.$.jBox.tip(mess, (type == undefined || type == '' ? 'info' : type), {opacity:0, 
+		top.$.jBox.tip(mess, (type == undefined || type == '' ? 'info' : type), {opacity:0,
 			timeout:  timeout == undefined ? 2000 : timeout});
 	}, lazytime == undefined ? 500 : lazytime);
 }
@@ -223,60 +225,60 @@ function strToDate(date){
 }
 
 // 日期加减
-function addDate(date, dadd){  
+function addDate(date, dadd){
 	date = date.valueOf();
 	date = date + dadd * 24 * 60 * 60 * 1000;
-	return new Date(date);  
+	return new Date(date);
 }
 
 //截取字符串，区别汉字和英文
-function abbr(name, maxLength){  
- if(!maxLength){  
-     maxLength = 20;  
- }  
- if(name==null||name.length<1){  
-     return "";  
- }  
- var w = 0;//字符串长度，一个汉字长度为2   
- var s = 0;//汉字个数   
- var p = false;//判断字符串当前循环的前一个字符是否为汉字   
- var b = false;//判断字符串当前循环的字符是否为汉字   
- var nameSub;  
- for (var i=0; i<name.length; i++) {  
-    if(i>1 && b==false){  
-         p = false;  
-    }  
-    if(i>1 && b==true){  
-         p = true;  
-    }  
-    var c = name.charCodeAt(i);  
-    //单字节加1   
-    if ((c >= 0x0001 && c <= 0x007e) || (0xff60<=c && c<=0xff9f)) {  
-         w++;  
-         b = false;  
-    }else {  
-         w+=2;  
-         s++;  
-         b = true;  
-    }  
-    if(w>maxLength && i<=name.length-1){  
-         if(b==true && p==true){  
-             nameSub = name.substring(0,i-2)+"...";  
-         }  
-         if(b==false && p==false){  
-             nameSub = name.substring(0,i-3)+"...";  
-         }  
-         if(b==true && p==false){  
-             nameSub = name.substring(0,i-2)+"...";  
-         }  
-         if(p==true){  
-             nameSub = name.substring(0,i-2)+"...";  
-         }  
-         break;  
-    }  
- }  
- if(w<=maxLength){  
-     return name;  
- }  
- return nameSub;  
+function abbr(name, maxLength){
+ if(!maxLength){
+     maxLength = 20;
+ }
+ if(name==null||name.length<1){
+     return "";
+ }
+ var w = 0;//字符串长度，一个汉字长度为2
+ var s = 0;//汉字个数
+ var p = false;//判断字符串当前循环的前一个字符是否为汉字
+ var b = false;//判断字符串当前循环的字符是否为汉字
+ var nameSub;
+ for (var i=0; i<name.length; i++) {
+    if(i>1 && b==false){
+         p = false;
+    }
+    if(i>1 && b==true){
+         p = true;
+    }
+    var c = name.charCodeAt(i);
+    //单字节加1
+    if ((c >= 0x0001 && c <= 0x007e) || (0xff60<=c && c<=0xff9f)) {
+         w++;
+         b = false;
+    }else {
+         w+=2;
+         s++;
+         b = true;
+    }
+    if(w>maxLength && i<=name.length-1){
+         if(b==true && p==true){
+             nameSub = name.substring(0,i-2)+"...";
+         }
+         if(b==false && p==false){
+             nameSub = name.substring(0,i-3)+"...";
+         }
+         if(b==true && p==false){
+             nameSub = name.substring(0,i-2)+"...";
+         }
+         if(p==true){
+             nameSub = name.substring(0,i-2)+"...";
+         }
+         break;
+    }
+ }
+ if(w<=maxLength){
+     return name;
+ }
+ return nameSub;
 }
