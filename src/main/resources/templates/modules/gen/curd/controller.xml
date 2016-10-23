@@ -63,14 +63,14 @@ public class ${ClassName}Controller extends BaseController {
 	@RequiresPermissions("${permissionPrefix}:view")
 	@RequestMapping(value = "form")
 	public String form(${ClassName}Vo ${className}Vo, Model model) {
-		model.addAttribute("${className}", ${className}Vo);
+		//model.addAttribute("${className}", ${className}Vo);
 		return "${lastPackageName}/${viewPrefix}Form";
 	}
 
 	@RequiresPermissions("${permissionPrefix}:view")
 	@RequestMapping(value = "show")
 	public String show(${ClassName}Vo ${className}Vo, Model model) {
-		model.addAttribute("${className}", ${className}Vo);
+		//model.addAttribute("${className}", ${className}Vo);
 		return "${lastPackageName}/${viewPrefix}Show";
 	}
 

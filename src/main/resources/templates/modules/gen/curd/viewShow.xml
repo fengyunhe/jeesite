@@ -19,50 +19,52 @@
 <body>
 	<ul class="nav nav-tabs">
 		<li><a href="${r"${ctx}"}/${urlPrefix}/">${functionNameSimple}列表</a></li>
-		<li class="active"><a href="${r"${ctx}"}/${urlPrefix}/form?id=${"${"+className+".id}"}">${functionNameSimple}<shiro:hasPermission name="${permissionPrefix}:edit">${r"${not empty "+className+".id?'修改':'添加'}"}</shiro:hasPermission><shiro:lacksPermission name="${permissionPrefix}:edit">查看</shiro:lacksPermission></a></li>
+		<li class="active"><a href="${r"${ctx}"}/${urlPrefix}/form?id=${"${"+className+"Vo.id}"}">${functionNameSimple}查看</a></li>
 	</ul><br/>
 <table class="table">
-
+		<tr>
+			<td colspan="2"><input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/></td>
+		</tr>
 		<#list table.columnList as c>
 			<#if c.isEdit?? && c.isEdit == "1" && (c.isNotBaseField || c.simpleJavaField == 'remarks')>
 		<tr>
 			<th>${c.comments}：</th>
 			<td>
 			<#if c.showType == "input">
-				${"$"}{${className}.${c.javaFieldId}}
+				${"$"}{${className}Vo.${c.javaFieldId}}
 			<#elseif c.showType == "textarea">
-				${"$"}{${className}.${c.javaFieldId}}
+				${"$"}{${className}Vo.${c.javaFieldId}}
 			<#elseif c.showType == "select">
-				${"$"}{fns:getDictLabel(${className}.${c.javaFieldId},'${c.dictType}' ,null)}
+				${"$"}{fns:getDictLabel(${className}Vo.${c.javaFieldId},'${c.dictType}' ,null)}
 			<#elseif c.showType == "checkbox">
 				<form:checkboxes path="${c.javaFieldId}" items="${"$"}{fns:getDictList('${c.dictType}')}" itemLabel="label" itemValue="value" htmlEscape="false" class="<#if c.isNull != "1">required</#if>"/>
 			<#elseif c.showType == "radiobox">
-				${"$"}{fns:getDictLabel(${className}.${c.javaFieldId},'${c.dictType}' ,null)}
+				${"$"}{fns:getDictLabel(${className}Vo.${c.javaFieldId},'${c.dictType}' ,null)}
 			<#elseif c.showType == "dateselect">
-				<fmt:formatDate value="${"$"}{${className}.${c.javaFieldId}}" pattern="yyyy-MM-dd"/>
+				<fmt:formatDate value="${"$"}{${className}Vo.${c.javaFieldId}}" pattern="yyyy-MM-dd"/>
 			<#elseif c.showType == "datetimeselect">
-				<fmt:formatDate value="${"$"}{${className}.${c.javaFieldId}}" pattern="yyyy-MM-dd HH:mm:ss"/>
+				<fmt:formatDate value="${"$"}{${className}Vo.${c.javaFieldId}}" pattern="yyyy-MM-dd HH:mm:ss"/>
 			<#elseif c.showType == "userselect">
 
-			${"$"}{fns:getUserById(${className}.${c.javaFieldId}).name}
+			${"$"}{fns:getUserById(${className}Vo.${c.javaFieldId}).name}
 
 			<#elseif c.showType == "officeselect">
 
 			<!-- TODO 这里应该显示部门名称-->
-				${"$"}{${className}.${c.javaFieldId}}
+				${"$"}{${className}Vo.${c.javaFieldId}}
 			<#elseif c.showType == "areaselect">
 				<!-- TODO 这里应该显示区域名称-->
-				${"$"}{${className}.${c.javaFieldId}}
+				${"$"}{${className}Vo.${c.javaFieldId}}
 			<#elseif c.showType == "fileselect">
-				    <a href='${"$"}{${className}.${c.javaFieldId}}' target="_blank">文件</a>
+				    <a href='${"$"}{${className}Vo.${c.javaFieldId}}' target="_blank">文件</a>
 			<#elseif c.showType == "fileselects">
-				    <c:forEach var ="f" items="${"$"}{fn:split(${className}.${c.javaFieldId},'|')}" varStatus="current">
+				    <c:forEach var ="f" items="${"$"}{fn:split(${className}Vo.${c.javaFieldId},'|')}" varStatus="current">
 				    	<c:if test="${"$"}{!empty f}">
 				    	<a href='${"$"}{f}' target="_blank">文件 ${"$"}{current.index+1}</a>
 				    	</c:if>
 				    </c:forEach>
 			<#else>
-					${"$"}{${className}.${c.javaFieldId}}
+					${"$"}{${className}Vo.${c.javaFieldId}}
 			</#if>
 			<#if c.isNull != "1">
 				<span class="help-inline"><font color="red">*</font> </span>
@@ -71,9 +73,6 @@
 		</tr>
 			</#if>
 		</#list>
-		<tr>
-			<td colspan="2"><input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/></td>
-		</tr>
 </body>
 </html>]]>
 	</content>
