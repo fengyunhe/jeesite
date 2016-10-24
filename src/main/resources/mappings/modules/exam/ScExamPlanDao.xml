@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fengyunhe.school.modules.exam.dao.ScExamPlanDao">
+    
+	<sql id="scExamPlanColumns">
+		a.id AS "id",
+		a.exam_id AS "examId",
+		a.semester_id AS "semesterId",
+		a.grade_id AS "gradeId",
+		a.course_id AS "courseId",
+		a.start_time AS "startTime",
+		a.end_time AS "endTime",
+		a.teacher1_id AS "teacher1Id",
+		a.teacher2_id AS "teacher2Id",
+		a.max_score AS "maxScore"
+	</sql>
+	
+	<sql id="scExamPlanJoins">
+		LEFT JOIN sys_user u8 ON u8.id = a.teacher1_id
+		LEFT JOIN sys_user u9 ON u9.id = a.teacher2_id
+	</sql>
+    
+	<select id="get" resultType="ScExamPlan">
+		SELECT 
+			<include refid="scExamPlanColumns"/>
+		FROM sc_exam_plan a
+		<include refid="scExamPlanJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ScExamPlan">
+		SELECT 
+			<include refid="scExamPlanColumns"/>
+		FROM sc_exam_plan a
+		<include refid="scExamPlanJoins"/>
+		<where>
+			
+			<if test="examId != null and examId != ''">
+				AND a.exam_id = #{examId}
+			</if>
+			<if test="semesterId != null and semesterId != ''">
+				AND a.semester_id = #{semesterId}
+			</if>
+			<if test="gradeId != null and gradeId != ''">
+				AND a.grade_id = #{gradeId}
+			</if>
+			<if test="courseId != null and courseId != ''">
+				AND a.course_id = #{courseId}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ScExamPlan">
+		SELECT 
+			<include refid="scExamPlanColumns"/>
+		FROM sc_exam_plan a
+		<include refid="scExamPlanJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO sc_exam_plan(
+			<if test="id!=null">
+			id, 
+			</if>
+			<if test="examId!=null">
+			exam_id, 
+			</if>
+			<if test="semesterId!=null">
+			semester_id, 
+			</if>
+			<if test="gradeId!=null">
+			grade_id, 
+			</if>
+			<if test="courseId!=null">
+			course_id, 
+			</if>
+			<if test="startTime!=null">
+			start_time, 
+			</if>
+			<if test="endTime!=null">
+			end_time, 
+			</if>
+			<if test="teacher1Id!=null">
+			teacher1_id, 
+			</if>
+			<if test="teacher2Id!=null">
+			teacher2_id, 
+			</if>
+			<if test="maxScore!=null">
+			max_score
+			</if>
+
+ 		) VALUES (
+			<if test="id!=null">
+			#{id}, 
+			</if>
+			<if test="examId!=null">
+			#{examId}, 
+			</if>
+			<if test="semesterId!=null">
+			#{semesterId}, 
+			</if>
+			<if test="gradeId!=null">
+			#{gradeId}, 
+			</if>
+			<if test="courseId!=null">
+			#{courseId}, 
+			</if>
+			<if test="startTime!=null">
+			#{startTime}, 
+			</if>
+			<if test="endTime!=null">
+			#{endTime}, 
+			</if>
+			<if test="teacher1Id!=null">
+			#{teacher1Id}, 
+			</if>
+			<if test="teacher2Id!=null">
+			#{teacher2Id}, 
+			</if>
+			<if test="maxScore!=null">
+			#{maxScore}
+			</if>
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sc_exam_plan SET 	
+				<if test="examId!=null">
+			exam_id = #{examId}, 
+				</if>
+				<if test="semesterId!=null">
+			semester_id = #{semesterId}, 
+				</if>
+				<if test="gradeId!=null">
+			grade_id = #{gradeId}, 
+				</if>
+				<if test="courseId!=null">
+			course_id = #{courseId}, 
+				</if>
+				<if test="startTime!=null">
+			start_time = #{startTime}, 
+				</if>
+				<if test="endTime!=null">
+			end_time = #{endTime}, 
+				</if>
+				<if test="teacher1Id!=null">
+			teacher1_id = #{teacher1Id}, 
+				</if>
+				<if test="teacher2Id!=null">
+			teacher2_id = #{teacher2Id}, 
+				</if>
+				<if test="maxScore!=null">
+			max_score = #{maxScore}
+				</if>
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM sc_exam_plan
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

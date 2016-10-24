@@ -539,7 +539,11 @@ public class SystemService extends BaseService implements InitializingBean {
 			identityService.deleteUser(userId);
 		}
 	}
-	
-	///////////////// Synchronized to the Activiti end //////////////////
+
+	public String getNameById(Integer teacherId) {
+		return userDao.getNameById(teacherId);
+	}
+
+    ///////////////// Synchronized to the Activiti end //////////////////
 	
 }
