@@ -49,6 +49,7 @@
 		<dict value="com.thinkgem.jeesite.modules.sys.entity.User" label="User"/>
 		<dict value="com.thinkgem.jeesite.modules.sys.entity.Office" label="Office"/>
 		<dict value="com.thinkgem.jeesite.modules.sys.entity.Area" label="Area"/>
+		<dict value="com.fengyunhe.school.modules.teacher.entity.ScTeacher" label="Teacher"/>
 		<dict value="This" label="ThisObj" description="生成当前对象"/>
 		<dict value="Custom" label="Custom" description="自定义对象，生成后手动设置"/>
 	</javaType>

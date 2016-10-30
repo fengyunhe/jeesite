@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fengyunhe.school.modules.vacation.dao.ScTeacherVacationDao">
+    
+	<sql id="scTeacherVacationColumns">
+		a.id AS "id",
+		a.request_date AS "requestDate",
+		a.begin_time AS "beginTime",
+		a.end_time AS "endTime",
+		a.vacation_type AS "vacationType",
+		a.remark AS "remark",
+		a.real_end_time AS "realEndTime",
+		a.status AS "status",
+		a.proc_inst_id AS "procInstId",
+		a.real_dates AS "realDates",
+		a.teacher_id AS "teacherId",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="scTeacherVacationJoins">
+		LEFT JOIN sc_teacher t on t.id = a.teacher_id
+	</sql>
+    
+	<select id="get" resultType="ScTeacherVacation">
+		SELECT 
+			<include refid="scTeacherVacationColumns"/>
+		FROM sc_teacher_vacation a
+		<include refid="scTeacherVacationJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ScTeacherVacation">
+		SELECT 
+			<include refid="scTeacherVacationColumns"/>
+		FROM sc_teacher_vacation a
+		<include refid="scTeacherVacationJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="vacationType != null and vacationType != ''">
+				AND a.vacation_type = #{vacationType}
+			</if>
+			<if test="status != null and status != ''">
+				AND a.status = #{status}
+			</if>
+			<if test="teacherId != null and teacherId != ''">
+				AND a.teacher_id = #{teacherId}
+			</if>
+			<if test="teacherName!=null and teacherName!=''">
+				AND t.name like concat('%',#{teacherName},'%')
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ScTeacherVacation">
+		SELECT 
+			<include refid="scTeacherVacationColumns"/>
+		FROM sc_teacher_vacation a
+		<include refid="scTeacherVacationJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO sc_teacher_vacation(
+			<if test="id!=null">
+			id, 
+			</if>
+			<if test="requestDate!=null">
+			request_date, 
+			</if>
+			<if test="beginTime!=null">
+			begin_time, 
+			</if>
+			<if test="endTime!=null">
+			end_time, 
+			</if>
+			<if test="vacationType!=null">
+			vacation_type, 
+			</if>
+			<if test="remark!=null">
+			remark, 
+			</if>
+			<if test="realEndTime!=null">
+			real_end_time, 
+			</if>
+			<if test="status!=null">
+			status, 
+			</if>
+			<if test="procInstId!=null">
+			proc_inst_id, 
+			</if>
+			<if test="realDates!=null">
+			real_dates, 
+			</if>
+			<if test="teacherId!=null">
+			teacher_id, 
+			</if>
+			<if test="createBy.id!=null">
+			create_by, 
+			</if>
+			<if test="createDate!=null">
+			create_date, 
+			</if>
+			<if test="updateBy.id!=null">
+			update_by, 
+			</if>
+			<if test="updateDate!=null">
+			update_date, 
+			</if>
+			<if test="remarks!=null">
+			remarks, 
+			</if>
+			<if test="delFlag!=null">
+			del_flag
+			</if>
+
+ 		) VALUES (
+			<if test="id!=null">
+			#{id}, 
+			</if>
+			<if test="requestDate!=null">
+			#{requestDate}, 
+			</if>
+			<if test="beginTime!=null">
+			#{beginTime}, 
+			</if>
+			<if test="endTime!=null">
+			#{endTime}, 
+			</if>
+			<if test="vacationType!=null">
+			#{vacationType}, 
+			</if>
+			<if test="remark!=null">
+			#{remark}, 
+			</if>
+			<if test="realEndTime!=null">
+			#{realEndTime}, 
+			</if>
+			<if test="status!=null">
+			#{status}, 
+			</if>
+			<if test="procInstId!=null">
+			#{procInstId}, 
+			</if>
+			<if test="realDates!=null">
+			#{realDates}, 
+			</if>
+			<if test="teacherId!=null">
+			#{teacherId}, 
+			</if>
+			<if test="createBy.id!=null">
+			#{createBy.id}, 
+			</if>
+			<if test="createDate!=null">
+			#{createDate}, 
+			</if>
+			<if test="updateBy.id!=null">
+			#{updateBy.id}, 
+			</if>
+			<if test="updateDate!=null">
+			#{updateDate}, 
+			</if>
+			<if test="remarks!=null">
+			#{remarks}, 
+			</if>
+			<if test="delFlag!=null">
+			#{delFlag}
+			</if>
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sc_teacher_vacation SET 	
+				<if test="requestDate!=null">
+			request_date = #{requestDate}, 
+				</if>
+				<if test="beginTime!=null">
+			begin_time = #{beginTime}, 
+				</if>
+				<if test="endTime!=null">
+			end_time = #{endTime}, 
+				</if>
+				<if test="vacationType!=null">
+			vacation_type = #{vacationType}, 
+				</if>
+				<if test="remark!=null">
+			remark = #{remark}, 
+				</if>
+				<if test="realEndTime!=null">
+			real_end_time = #{realEndTime}, 
+				</if>
+				<if test="status!=null">
+			status = #{status}, 
+				</if>
+				<if test="procInstId!=null">
+			proc_inst_id = #{procInstId}, 
+				</if>
+				<if test="realDates!=null">
+			real_dates = #{realDates}, 
+				</if>
+				<if test="teacherId!=null">
+			teacher_id = #{teacherId}, 
+				</if>
+				<if test="updateBy.id!=null">
+			update_by = #{updateBy.id}, 
+				</if>
+				<if test="updateDate!=null">
+			update_date = #{updateDate}, 
+				</if>
+				<if test="remarks!=null">
+			remarks = #{remarks}
+				</if>
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE sc_teacher_vacation SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

@@ -3,6 +3,7 @@
  */
 package com.thinkgem.jeesite.common.persistence;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public interface CrudDao<T> extends BaseDao {
 	 * @param id
 	 * @return
 	 */
-	public T get(String id);
+	public T get(Serializable id);
 	
 	/**
 	 * 获取单条数据
