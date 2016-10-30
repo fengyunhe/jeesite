@@ -264,4 +264,12 @@
         <example>${fns:getTeacherName(teacherId)}</example>
     </function>
 
+    <function>
+        <description>根据名称查询学生列表</description>
+        <name>getStudentList</name>
+        <function-class>com.fengyunhe.school.SelectUtils</function-class>
+        <function-signature>java.util.List getStudentList(java.lang.String)</function-signature>
+        <example>${fns:getStudentList("")}</example>
+    </function>
+
 </taglib>

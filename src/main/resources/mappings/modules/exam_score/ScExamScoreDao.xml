@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fengyunhe.school.modules.exam_score.dao.ScExamScoreDao">
+    
+	<sql id="scExamScoreColumns">
+		a.id AS "id",
+		a.student_id AS "studentId",
+		a.score AS "score",
+		a.exam_type AS "examType",
+		a.semester_id AS "semesterId",
+		a.grade_id AS "gradeId",
+		a.course_id AS "courseId",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="scExamScoreJoins">
+	</sql>
+    
+	<select id="get" resultType="ScExamScore">
+		SELECT 
+			<include refid="scExamScoreColumns"/>
+		FROM sc_exam_score a
+		<include refid="scExamScoreJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ScExamScore">
+		SELECT 
+			<include refid="scExamScoreColumns"/>
+		FROM sc_exam_score a
+		<include refid="scExamScoreJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="studentId != null and studentId != ''">
+				AND a.student_id = #{studentId}
+			</if>
+			<if test="beginScore != null and endScore != null and beginScore != '' and endScore != ''">
+				AND a.score BETWEEN #{beginScore} AND #{endScore}
+			</if>
+			<if test="examType != null and examType != ''">
+				AND a.exam_type = #{examType}
+			</if>
+			<if test="semesterId != null and semesterId != ''">
+				AND a.semester_id = #{semesterId}
+			</if>
+			<if test="gradeId != null and gradeId != ''">
+				AND a.grade_id = #{gradeId}
+			</if>
+			<if test="courseId != null and courseId != ''">
+				AND a.course_id = #{courseId}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ScExamScore">
+		SELECT 
+			<include refid="scExamScoreColumns"/>
+		FROM sc_exam_score a
+		<include refid="scExamScoreJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO sc_exam_score(
+			<if test="id!=null">
+			id, 
+			</if>
+			<if test="studentId!=null">
+			student_id, 
+			</if>
+			<if test="score!=null">
+			score, 
+			</if>
+			<if test="examType!=null">
+			exam_type, 
+			</if>
+			<if test="semesterId!=null">
+			semester_id, 
+			</if>
+			<if test="gradeId!=null">
+			grade_id, 
+			</if>
+			<if test="courseId!=null">
+			course_id, 
+			</if>
+			<if test="createBy.id!=null">
+			create_by, 
+			</if>
+			<if test="createDate!=null">
+			create_date, 
+			</if>
+			<if test="updateBy.id!=null">
+			update_by, 
+			</if>
+			<if test="updateDate!=null">
+			update_date, 
+			</if>
+			<if test="remarks!=null">
+			remarks, 
+			</if>
+			<if test="delFlag!=null">
+			del_flag
+			</if>
+
+ 		) VALUES (
+			<if test="id!=null">
+			#{id}, 
+			</if>
+			<if test="studentId!=null">
+			#{studentId}, 
+			</if>
+			<if test="score!=null">
+			#{score}, 
+			</if>
+			<if test="examType!=null">
+			#{examType}, 
+			</if>
+			<if test="semesterId!=null">
+			#{semesterId}, 
+			</if>
+			<if test="gradeId!=null">
+			#{gradeId}, 
+			</if>
+			<if test="courseId!=null">
+			#{courseId}, 
+			</if>
+			<if test="createBy.id!=null">
+			#{createBy.id}, 
+			</if>
+			<if test="createDate!=null">
+			#{createDate}, 
+			</if>
+			<if test="updateBy.id!=null">
+			#{updateBy.id}, 
+			</if>
+			<if test="updateDate!=null">
+			#{updateDate}, 
+			</if>
+			<if test="remarks!=null">
+			#{remarks}, 
+			</if>
+			<if test="delFlag!=null">
+			#{delFlag}
+			</if>
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sc_exam_score SET 	
+				<if test="studentId!=null">
+			student_id = #{studentId}, 
+				</if>
+				<if test="score!=null">
+			score = #{score}, 
+				</if>
+				<if test="examType!=null">
+			exam_type = #{examType}, 
+				</if>
+				<if test="semesterId!=null">
+			semester_id = #{semesterId}, 
+				</if>
+				<if test="gradeId!=null">
+			grade_id = #{gradeId}, 
+				</if>
+				<if test="courseId!=null">
+			course_id = #{courseId}, 
+				</if>
+				<if test="updateBy.id!=null">
+			update_by = #{updateBy.id}, 
+				</if>
+				<if test="updateDate!=null">
+			update_date = #{updateDate}, 
+				</if>
+				<if test="remarks!=null">
+			remarks = #{remarks}
+				</if>
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE sc_exam_score SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

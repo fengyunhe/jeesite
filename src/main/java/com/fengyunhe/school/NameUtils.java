@@ -1,5 +1,6 @@
 package com.fengyunhe.school;
 
+import com.fengyunhe.school.modules.student.dao.ScStudentDao;
 import com.fengyunhe.school.modules.teacher.dao.ScTeacherDao;
 import com.fengyunhe.school.modules.teacher.entity.ScTeacher;
 import com.thinkgem.jeesite.common.utils.SpringContextHolder;
@@ -9,6 +10,7 @@ import com.thinkgem.jeesite.common.utils.SpringContextHolder;
  */
 public class NameUtils {
     public static ScTeacherDao scTeacherDao = SpringContextHolder.getBean(ScTeacherDao.class);
+    public static ScStudentDao scStudentDao = SpringContextHolder.getBean(ScStudentDao.class);
 
     public static String getTeacherName(int teacherId) {
         ScTeacher scTeacher = scTeacherDao.get(teacherId);
@@ -17,4 +19,6 @@ public class NameUtils {
         }
         return null;
     }
+
+
 }
