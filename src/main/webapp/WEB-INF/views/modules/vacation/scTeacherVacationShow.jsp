@@ -76,12 +76,12 @@
 		<tr>
 			<th width="200">状态：</th>
 			<td>
-				${scTeacherVacationVo.status}
+				${fns:getDictLabel(scTeacherVacationVo.status,'sc_vacation_status','')}
 				<span class="help-inline"><font color="red">*</font> </span>
 			</td>
 		</tr>
 		<tr>
-			<th width="200">流程引擎对应的id：</th>
+			<th width="200">流程引擎对应的ID：</th>
 			<td>
 				${scTeacherVacationVo.procInstId}
 				<span class="help-inline"><font color="red">*</font> </span>
@@ -94,9 +94,9 @@
 			</td>
 		</tr>
 		<tr>
-			<th width="200">教师id：</th>
+			<th width="200">请假教师：</th>
 			<td>
-				${scTeacherVacationVo.teacherId}
+				${fns:getTeacherName(scTeacherVacationVo.teacherId)}
 			</td>
 		</tr>
 		<tr>
