@@ -265,6 +265,14 @@
     </function>
 
     <function>
+        <description>根据id获取学生姓名</description>
+        <name>getStudentName</name>
+        <function-class>com.fengyunhe.school.NameUtils</function-class>
+        <function-signature>java.lang.String getStudentName(int)</function-signature>
+        <example>${fns:getTeacherName(studentId)}</example>
+    </function>
+
+    <function>
         <description>根据名称查询学生列表</description>
         <name>getStudentList</name>
         <function-class>com.fengyunhe.school.SelectUtils</function-class>

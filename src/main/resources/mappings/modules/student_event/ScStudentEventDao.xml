@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fengyunhe.school.modules.student_event.dao.ScStudentEventDao">
+    
+	<sql id="scStudentEventColumns">
+		a.id AS "id",
+		a.event_time AS "eventTime",
+		a.event_type AS "eventType",
+		a.content AS "content",
+		a.student_id AS "studentId",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="scStudentEventJoins">
+	</sql>
+    
+	<select id="get" resultType="ScStudentEvent">
+		SELECT 
+			<include refid="scStudentEventColumns"/>
+		FROM sc_student_event a
+		<include refid="scStudentEventJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ScStudentEvent">
+		SELECT 
+			<include refid="scStudentEventColumns"/>
+		FROM sc_student_event a
+		<include refid="scStudentEventJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="beginEventTime != null and endEventTime != null and beginEventTime != '' and endEventTime != ''">
+				AND a.event_time BETWEEN #{beginEventTime} AND #{endEventTime}
+			</if>
+			<if test="eventType != null and eventType != ''">
+				AND a.event_type = #{eventType}
+			</if>
+			<if test="content != null and content != ''">
+				AND a.content LIKE 
+					<if test="dbName == 'oracle'">'%'||#{content}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{content}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{content},'%')</if>
+			</if>
+			<if test="studentId != null and studentId != ''">
+				AND a.student_id = #{studentId}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ScStudentEvent">
+		SELECT 
+			<include refid="scStudentEventColumns"/>
+		FROM sc_student_event a
+		<include refid="scStudentEventJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO sc_student_event(
+			<if test="id!=null">
+			id, 
+			</if>
+			<if test="eventTime!=null">
+			event_time, 
+			</if>
+			<if test="eventType!=null">
+			event_type, 
+			</if>
+			<if test="content!=null">
+			content, 
+			</if>
+			<if test="studentId!=null">
+			student_id, 
+			</if>
+			<if test="createBy.id!=null">
+			create_by, 
+			</if>
+			<if test="createDate!=null">
+			create_date, 
+			</if>
+			<if test="updateBy.id!=null">
+			update_by, 
+			</if>
+			<if test="updateDate!=null">
+			update_date, 
+			</if>
+			<if test="remarks!=null">
+			remarks, 
+			</if>
+			<if test="delFlag!=null">
+			del_flag
+			</if>
+
+ 		) VALUES (
+			<if test="id!=null">
+			#{id}, 
+			</if>
+			<if test="eventTime!=null">
+			#{eventTime}, 
+			</if>
+			<if test="eventType!=null">
+			#{eventType}, 
+			</if>
+			<if test="content!=null">
+			#{content}, 
+			</if>
+			<if test="studentId!=null">
+			#{studentId}, 
+			</if>
+			<if test="createBy.id!=null">
+			#{createBy.id}, 
+			</if>
+			<if test="createDate!=null">
+			#{createDate}, 
+			</if>
+			<if test="updateBy.id!=null">
+			#{updateBy.id}, 
+			</if>
+			<if test="updateDate!=null">
+			#{updateDate}, 
+			</if>
+			<if test="remarks!=null">
+			#{remarks}, 
+			</if>
+			<if test="delFlag!=null">
+			#{delFlag}
+			</if>
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sc_student_event SET 	
+				<if test="eventTime!=null">
+			event_time = #{eventTime}, 
+				</if>
+				<if test="eventType!=null">
+			event_type = #{eventType}, 
+				</if>
+				<if test="content!=null">
+			content = #{content}, 
+				</if>
+				<if test="studentId!=null">
+			student_id = #{studentId}, 
+				</if>
+				<if test="updateBy.id!=null">
+			update_by = #{updateBy.id}, 
+				</if>
+				<if test="updateDate!=null">
+			update_date = #{updateDate}, 
+				</if>
+				<if test="remarks!=null">
+			remarks = #{remarks}
+				</if>
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE sc_student_event SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
