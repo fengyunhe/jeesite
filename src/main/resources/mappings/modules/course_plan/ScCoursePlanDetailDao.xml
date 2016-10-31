@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fengyunhe.school.modules.course_plan.dao.ScCoursePlanDetailDao">
+    
+	<sql id="scCoursePlanDetailColumns">
+		a.id AS "id",
+		a.plan_id AS "planId",
+		a.semester_id AS "semesterId",
+		a.class_id AS "classId",
+		a.course_id AS "courseId",
+		a.study_date AS "studyDate",
+		a.teacher_id AS "teacherId",
+		a.seq AS "seq"
+	</sql>
+	
+	<sql id="scCoursePlanDetailJoins">
+	</sql>
+    
+	<select id="get" resultType="ScCoursePlanDetail">
+		SELECT 
+			<include refid="scCoursePlanDetailColumns"/>
+		FROM sc_course_plan_detail a
+		<include refid="scCoursePlanDetailJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ScCoursePlanDetail">
+		SELECT 
+			<include refid="scCoursePlanDetailColumns"/>
+		FROM sc_course_plan_detail a
+		<include refid="scCoursePlanDetailJoins"/>
+		<where>
+			
+			<if test="semesterId != null and semesterId != ''">
+				AND a.semester_id = #{semesterId}
+			</if>
+			<if test="classId != null and classId != ''">
+				AND a.class_id = #{classId}
+			</if>
+			<if test="courseId != null and courseId != ''">
+				AND a.course_id = #{courseId}
+			</if>
+			<if test="studyDate != null and studyDate != ''">
+				AND a.study_date = #{studyDate}
+			</if>
+			<if test="teacherId != null and teacherId != ''">
+				AND a.teacher_id = #{teacherId}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ScCoursePlanDetail">
+		SELECT 
+			<include refid="scCoursePlanDetailColumns"/>
+		FROM sc_course_plan_detail a
+		<include refid="scCoursePlanDetailJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO sc_course_plan_detail(
+			<if test="id!=null">
+			id, 
+			</if>
+			<if test="semesterId!=null">
+			semester_id, 
+			</if>
+			<if test="classId!=null">
+			class_id, 
+			</if>
+			<if test="courseId!=null">
+			course_id, 
+			</if>
+			<if test="studyDate!=null">
+			study_date, 
+			</if>
+			<if test="teacherId!=null">
+			teacher_id, 
+			</if>
+			<if test="seq!=null">
+			seq
+			</if>
+
+ 		) VALUES (
+			<if test="id!=null">
+			#{id}, 
+			</if>
+			<if test="semesterId!=null">
+			#{semesterId}, 
+			</if>
+			<if test="classId!=null">
+			#{classId}, 
+			</if>
+			<if test="courseId!=null">
+			#{courseId}, 
+			</if>
+			<if test="studyDate!=null">
+			#{studyDate}, 
+			</if>
+			<if test="teacherId!=null">
+			#{teacherId}, 
+			</if>
+			<if test="seq!=null">
+			#{seq}
+			</if>
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sc_course_plan_detail SET 	
+				<if test="semesterId!=null">
+			semester_id = #{semesterId}, 
+				</if>
+				<if test="classId!=null">
+			class_id = #{classId}, 
+				</if>
+				<if test="courseId!=null">
+			course_id = #{courseId}, 
+				</if>
+				<if test="studyDate!=null">
+			study_date = #{studyDate}, 
+				</if>
+				<if test="teacherId!=null">
+			teacher_id = #{teacherId}, 
+				</if>
+				<if test="seq!=null">
+			seq = #{seq}
+				</if>
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM sc_course_plan_detail
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
