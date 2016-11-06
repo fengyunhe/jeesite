@@ -10,10 +10,10 @@ import com.thinkgem.jeesite.modules.sys.entity.Dict;
 import com.thinkgem.jeesite.modules.sys.service.DictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 /**
@@ -57,7 +57,7 @@ public class CoursePlanDetailController extends BaseController {
         scClass.setPage(page);
         List<ScClass> classList = scClassService.findList(scClass);
         //班级的课程安排
-        List<ScCoursePlanDetail> classCourseList = null;
+        List<ScCoursePlanDetail> classCourseList = this.scClassService.getAllCoursePlan();
 
 
         Map<String, String> courseMap = new HashMap<String, String>();
@@ -65,7 +65,7 @@ public class CoursePlanDetailController extends BaseController {
         if (classCourseList != null) {
             for (ScCoursePlanDetail scCoursePlanDetail : classCourseList) {
                 String key = String.format("course_%s_%s_%s", scCoursePlanDetail.getClassId(),
-                        scCoursePlanDetail.getStudyDate(),
+                        scCoursePlanDetail.getWeekday(),
                         scCoursePlanDetail.getSeq());
                 courseMap.put(key, scCoursePlanDetail.getCourseId());
             }
@@ -96,6 +96,7 @@ public class CoursePlanDetailController extends BaseController {
                     v2 = Collections.EMPTY_LIST;
                 }
                 gradeList.add(ImmutableMap.of(
+                        "gradeId", dict.getValue(),
                         "gradeName", dict.getLabel(),
                         "classList", v2
                 ));
@@ -110,5 +111,46 @@ public class CoursePlanDetailController extends BaseController {
         modelMap.put("perDayClass", 8);
 
         return "modules/course_plan/scCoursePlan";
+    }
+
+    /**
+     * 更新课程安排
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping("/update")
+    public String update(ModelMap map, HttpServletRequest request) {
+
+        String gradeId = request.getParameter("gradeId");
+
+
+        List<ScCoursePlanDetail> list = new ArrayList<ScCoursePlanDetail>();
+        for (Object key : request.getParameterMap().keySet()) {
+            String paramName = key
+                    .toString();
+            if (paramName.startsWith("course_")) {
+                String[] split = paramName.split("_"); //value_${x}_${c.classId}_${courseSeq}
+                if (split.length == 4) {
+                    String weekDay = split[1];
+                    String classId = split[2];
+                    String seq = split[3];
+                    String value = request.getParameter(paramName);
+                    ScCoursePlanDetail planDetail = new ScCoursePlanDetail();
+                    planDetail.setGradeId(gradeId);
+                    planDetail.setClassId(Integer.valueOf(classId));
+                    planDetail.setSeq(Integer.valueOf(seq));
+                    planDetail.setCourseId(value);
+                    planDetail.setWeekday(weekDay);
+                    list.add(planDetail);
+//                    planDetail.setSemesterId();
+                }
+            }
+
+        }
+
+
+        this.scClassService.updateCourseByGrade(gradeId, list);
+        return "redirect:./list";
     }
 }

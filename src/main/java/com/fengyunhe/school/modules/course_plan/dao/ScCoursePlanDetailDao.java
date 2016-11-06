@@ -10,7 +10,7 @@ import com.fengyunhe.school.modules.course_plan.entity.ScCoursePlanDetail;
 /**
  * 课程安排DAO接口
  * @author yangyan
- * @version 2016-10-31
+ * @version 2016-11-06
  */
 @MyBatisDao
 public interface ScCoursePlanDetailDao extends CrudDao<ScCoursePlanDetail> {

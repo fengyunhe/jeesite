@@ -4,8 +4,13 @@
 package com.fengyunhe.school.modules.cls.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import com.fengyunhe.school.modules.course_plan.dao.ScCoursePlanDetailDao;
+import com.fengyunhe.school.modules.course_plan.entity.ScCoursePlanDetail;
+import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +29,10 @@ import com.fengyunhe.school.modules.cls.dao.ScClassDao;
 @Service
 @Transactional(readOnly = true)
 public class ScClassService extends CrudService<ScClassDao, ScClass> {
+
+
+	@Autowired
+	private ScCoursePlanDetailDao scCoursePlanDetailDao;
 
 	public ScClassVo get(String id) {
 		ScClass po = super.get(id);
@@ -74,5 +83,21 @@ public class ScClassService extends CrudService<ScClassDao, ScClass> {
 		//TODO 设置其他vo中的属性
 		return vo;
 	}
-	
+
+
+	@Transactional
+	public void updateCourseByGrade(String gradeId, List<ScCoursePlanDetail> list) {
+		ScCoursePlanDetail deleteWhere = new ScCoursePlanDetail();
+		deleteWhere.setGradeId(gradeId);
+		scCoursePlanDetailDao.delete(deleteWhere);
+
+		for (ScCoursePlanDetail planDetail : list) {
+			planDetail.preInsert();
+			scCoursePlanDetailDao.insert(planDetail);
+		}
+	}
+
+	public List<ScCoursePlanDetail> getAllCoursePlan() {
+		return scCoursePlanDetailDao.findAllList(new ScCoursePlanDetail());
+	}
 }

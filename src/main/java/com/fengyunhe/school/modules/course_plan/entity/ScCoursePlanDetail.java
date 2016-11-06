@@ -4,26 +4,24 @@
 package com.fengyunhe.school.modules.course_plan.entity;
 
 import org.hibernate.validator.constraints.Length;
-import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import com.thinkgem.jeesite.common.persistence.DataEntity;
 
 /**
  * 课程安排Entity
  * @author yangyan
- * @version 2016-10-31
+ * @version 2016-11-06
  */
 public class ScCoursePlanDetail extends DataEntity<ScCoursePlanDetail> {
 	
 	private static final long serialVersionUID = 1L;
-	private String planId;		// 课程表
 	private String semesterId;		// 学期
-	private String classId;		// 班级
+	private Integer classId;		// 班级
+	private String weekday;		// 星期中的某一天，1=星期一，2=星期二，以此类推，字典中有
 	private String courseId;		// 学科
-	private Date studyDate;		// 日期
-	private String teacherId;		// 代课老师
-	private String seq;		// 课表顺序
+	private Integer teacherId;		// 代课老师
+	private Integer seq;		// 课表顺序
+	private String gradeId;		// 年级
 	
 	public ScCoursePlanDetail() {
 		super();
@@ -33,15 +31,6 @@ public class ScCoursePlanDetail extends DataEntity<ScCoursePlanDetail> {
 		super(id);
 	}
 
-	@Length(min=1, max=11, message="课程表长度必须介于 1 和 11 之间")
-	public String getPlanId() {
-		return planId;
-	}
-
-	public void setPlanId(String planId) {
-		this.planId = planId;
-	}
-	
 	@Length(min=0, max=11, message="学期长度必须介于 0 和 11 之间")
 	public String getSemesterId() {
 		return semesterId;
@@ -52,12 +41,21 @@ public class ScCoursePlanDetail extends DataEntity<ScCoursePlanDetail> {
 	}
 	
 	@Length(min=0, max=11, message="班级长度必须介于 0 和 11 之间")
-	public String getClassId() {
+	public Integer getClassId() {
 		return classId;
 	}
 
-	public void setClassId(String classId) {
+	public void setClassId(Integer classId) {
 		this.classId = classId;
+	}
+	
+	@Length(min=0, max=1, message="星期中的某一天，1=星期一，2=星期二，以此类推，字典中有长度必须介于 0 和 1 之间")
+	public String getWeekday() {
+		return weekday;
+	}
+
+	public void setWeekday(String weekday) {
+		this.weekday = weekday;
 	}
 	
 	@Length(min=0, max=11, message="学科长度必须介于 0 和 11 之间")
@@ -69,31 +67,31 @@ public class ScCoursePlanDetail extends DataEntity<ScCoursePlanDetail> {
 		this.courseId = courseId;
 	}
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	public Date getStudyDate() {
-		return studyDate;
-	}
-
-	public void setStudyDate(Date studyDate) {
-		this.studyDate = studyDate;
-	}
-	
 	@Length(min=0, max=11, message="代课老师长度必须介于 0 和 11 之间")
-	public String getTeacherId() {
+	public Integer getTeacherId() {
 		return teacherId;
 	}
 
-	public void setTeacherId(String teacherId) {
+	public void setTeacherId(Integer teacherId) {
 		this.teacherId = teacherId;
 	}
 	
 	@Length(min=0, max=11, message="课表顺序长度必须介于 0 和 11 之间")
-	public String getSeq() {
+	public Integer getSeq() {
 		return seq;
 	}
 
-	public void setSeq(String seq) {
+	public void setSeq(Integer seq) {
 		this.seq = seq;
+	}
+	
+	@Length(min=0, max=30, message="年级长度必须介于 0 和 30 之间")
+	public String getGradeId() {
+		return gradeId;
+	}
+
+	public void setGradeId(String gradeId) {
+		this.gradeId = gradeId;
 	}
 	
 }

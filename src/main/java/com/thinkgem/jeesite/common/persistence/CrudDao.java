@@ -70,8 +70,7 @@ public interface CrudDao<T> extends BaseDao {
 	 * @see public int delete(T entity)
 	 * @return
 	 */
-	@Deprecated
-	public int delete(String id);
+	public int deleteById(String id);
 	
 	/**
 	 * 删除数据（一般为逻辑删除，更新del_flag字段为1）
