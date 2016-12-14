@@ -4,6 +4,7 @@
 <head>
 	<title>模板管理</title>
 	<meta name="decorator" content="default"/>
+	<link href="//cdn.bootcss.com/codemirror/5.21.0/codemirror.min.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#value").focus();
@@ -22,6 +23,10 @@
 					}
 				}
 			});
+
+
+
+
 		});
 	</script>
 </head>
@@ -39,7 +44,7 @@
 			</div>
 		</div>
 		<div class="control-group">
-            <form:textarea id="source" path="source" htmlEscape="true" cssStyle="width:100%;height:460px;"/>
+            <form:textarea  id="source" path="source" htmlEscape="true" cssStyle="width:100%;min-height:460px;"/>
             <%--<sys:ckeditor replace="source" uploadPath="/cms/template" />--%>
 		</div>
 		<div class="form-actions">
@@ -47,5 +52,15 @@
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
 		</div>
 	</form:form>
+	<script src="//cdn.bootcss.com/codemirror/5.21.0/codemirror.min.js"></script>
+
+	<script>
+        var myTextarea = document.getElementById('source');
+        var CodeMirrorEditor = CodeMirror.fromTextArea(myTextarea, {
+            mode: "application/x-jsp",
+            lineNumbers: true
+        });
+	</script>
+
 </body>
 </html>
