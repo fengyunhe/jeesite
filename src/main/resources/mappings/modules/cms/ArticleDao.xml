@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.thinkgem.jeesite.modules.cms.dao.ArticleDao">
-    
+
 	<sql id="cmsArticleColumns">
 		a.id AS "id",
 		a.category_id AS "category.id",
@@ -26,44 +26,44 @@
 		c.name AS "category.name",
 		u.name AS "user.name"
 	</sql>
-	
+
 	<sql id="cmsArticleJoins">
 		JOIN cms_category c ON c.id = a.category_id
 		JOIN sys_office o ON o.id = c.office_id
 		JOIN sys_user u ON u.id = a.create_by
 	</sql>
-    
+
 	<select id="get" resultType="Article">
-		SELECT 
+		SELECT
 			<include refid="cmsArticleColumns"/>
 		FROM cms_article a
 		<include refid="cmsArticleJoins"/>
 		WHERE a.id = #{id}
 	</select>
-	
+
 	<select id="findList" resultType="Article">
-		SELECT 
+		SELECT
 			<include refid="cmsArticleColumns"/>
 		FROM cms_article a
 		<include refid="cmsArticleJoins"/>
 		<where>
 			a.del_flag = #{delFlag}
 			<if test="title != null and title != ''">
-				AND a.title LIKE 
+				AND a.title LIKE
 					<if test="dbName == 'oracle'">'%'||#{title}||'%'</if>
 					<if test="dbName == 'mssql'">'%'+#{title}+'%'</if>
 					<if test="dbName == 'mysql'">CONCAT('%', #{title}, '%')</if>
 			</if>
 			<if test="posid != null and posid != ''">
-				AND a.posid LIKE 
+				AND a.posid LIKE
 					<if test="dbName == 'oracle'">'%'||#{posid}||'%'</if>
 					<if test="dbName == 'mssql'">'%'+#{posid}+'%'</if>
 					<if test="dbName == 'mysql'">CONCAT('%', #{posid}, '%')</if>
 			</if>
-			<if test="category.id != null and category.id != ''">
+			<if test="category!=null and category.id != null and category.id != ''">
 				AND (a.category_id = #{category.id}
 				<if test="category.parentIds != null and category.parentIds != ''">
-					or c.parent_ids like 
+					or c.parent_ids like
 						<if test="dbName == 'oracle'">'%'||#{category.id}||'%'</if>
 						<if test="dbName == 'mssql'">'%,'+#{category.id}+',%'</if>
 						<if test="dbName == 'mysql'">CONCAT('%,', #{category.id}, ',%')</if>
@@ -86,15 +86,15 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+
 	<select id="findAllList" resultType="Article">
-		SELECT 
+		SELECT
 			<include refid="cmsArticleColumns"/>
 		FROM cms_article a
 		<include refid="cmsArticleJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
-		</where>		
+		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
 				ORDER BY ${page.orderBy}
@@ -104,7 +104,7 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+
 	<insert id="insert">
 		INSERT INTO cms_article(
 			id,
@@ -150,9 +150,9 @@
 			#{delFlag}
 		)
 	</insert>
-	
+
 	<update id="update">
-		UPDATE cms_article SET 	
+		UPDATE cms_article SET
 			category_id = #{category.id},
 			title = #{title},
 			link = #{link},
@@ -173,37 +173,37 @@
 			del_flag = #{delFlag}
 		WHERE id = #{id}
 	</update>
-	
+
 	<update id="delete">
-		UPDATE cms_article SET 
+		UPDATE cms_article SET
 			del_flag = #{DEL_FLAG_DELETE}
 		WHERE id = #{id}
 	</update>
-	
+
 	<select id="findByIdIn" resultType="Article">
-		SELECT 
+		SELECT
 			<include refid="cmsArticleColumns"/>
-		from cms_article a where 
+		from cms_article a where
 		<where>
 			id in (${id});
-		</where>		
+		</where>
 	</select>
- 
+
 	<update id="updateExpiredWeight">
 		update cms_article SET
 			 weight = 0
-		WHERE weight &gt; 0 AND weight_date &lt; 
+		WHERE weight &gt; 0 AND weight_date &lt;
 			<if test="dbName == 'oracle'">sysdate</if>
 			<if test="dbName == 'mssql'">FLOOR(CONVERT(FLOAT,GETDATE()))</if>
 			<if test="dbName == 'mysql'">CURDATE()</if>
 	</update>
-	
+
 	<update id="updateHitsAddOne">
 		update cms_article set
 			 hits = hits+1
 		 WHERE id = #{id}
 	</update>
-	
+
 	<select id="findStats" resultType="Category">
 		select max(c.id) AS "id",
 		       max(c.name) AS "name",
@@ -219,10 +219,10 @@
 		  JOIN cms_category cp ON c.parent_id = cp.id
 		  JOIN sys_office o ON o.id = c.office_id
 		<where>
-			a.del_flag = #{DEL_FLAG_NORMAL} 
+			a.del_flag = #{DEL_FLAG_NORMAL}
 			AND c.site_id = #{site.id}
 			<if test="office.id != null and office.id != ''">
-				AND (c.office_id = #{office.id} OR o.parent_ids like 
+				AND (c.office_id = #{office.id} OR o.parent_ids like
 					<if test="dbName == 'oracle'">'%'||#{office.id}||'%'</if>
 					<if test="dbName == 'mssql'">'%'+#{office.id}+'%'</if>
 					<if test="dbName == 'mysql'">CONCAT('%', #{office.id}, '%')</if>)
@@ -234,13 +234,13 @@
 				AND a.update_date <![CDATA[ <= #{endDate} ]]>
 			</if>
 			<if test="id != null and id != ''">
-				AND (c.id = #{id} OR c.parent_ids LIKE 
+				AND (c.id = #{id} OR c.parent_ids LIKE
 					<if test="dbName == 'oracle'">'%'||#{id}||'%'</if>
 					<if test="dbName == 'mssql'">'%'+#{id}+'%'</if>
 					<if test="dbName == 'mysql'">CONCAT('%', #{id}, '%')</if>)
 			</if>
 			group by cp.sort, cp.id, c.sort, c.id
 			order by cp.sort, cp.id, c.sort, c.id
-		</where>		
+		</where>
 	</select>
 </mapper>

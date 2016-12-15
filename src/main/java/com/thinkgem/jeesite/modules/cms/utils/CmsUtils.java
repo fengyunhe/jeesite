@@ -26,6 +26,7 @@ import com.thinkgem.jeesite.modules.cms.service.SiteService;
 
 import javax.servlet.ServletContext;
 
+import com.thinkgem.jeesite.modules.cms.vo.ArticleVo;
 import org.springframework.ui.Model;
 
 /**
@@ -34,7 +35,7 @@ import org.springframework.ui.Model;
  * @version 2013-5-29
  */
 public class CmsUtils {
-	
+
 	private static SiteService siteService = SpringContextHolder.getBean(SiteService.class);
 	private static CategoryService categoryService = SpringContextHolder.getBean(CategoryService.class);
 	private static ArticleService articleService = SpringContextHolder.getBean(ArticleService.class);
@@ -42,7 +43,7 @@ public class CmsUtils {
     private static ServletContext context = SpringContextHolder.getBean(ServletContext.class);
 
 	private static final String CMS_CACHE = "cmsCache";
-	
+
 	/**
 	 * 获得站点列表
 	 */
@@ -57,7 +58,7 @@ public class CmsUtils {
 		}
 		return siteList;
 	}
-	
+
 	/**
 	 * 获得站点信息
 	 * @param siteId 站点编号
@@ -74,7 +75,7 @@ public class CmsUtils {
 		}
 		return new Site(id);
 	}
-	
+
 	/**
 	 * 获得主导航列表
 	 * @param siteId 站点编号
@@ -94,7 +95,7 @@ public class CmsUtils {
 		}
 		return mainNavList;
 	}
-	
+
 	/**
 	 * 获取栏目
 	 * @param categoryId 栏目编号
@@ -103,7 +104,7 @@ public class CmsUtils {
 	public static Category getCategory(String categoryId){
 		return categoryService.get(categoryId);
 	}
-	
+
 	/**
 	 * 获得栏目列表
 	 * @param siteId 站点编号
@@ -132,7 +133,7 @@ public class CmsUtils {
 	public static List<Category> getCategoryListByIds(String categoryIds){
 		return categoryService.findByIds(categoryIds);
 	}
-	
+
 	/**
 	 * 获取文章
 	 * @param articleId 文章编号
@@ -141,7 +142,7 @@ public class CmsUtils {
 	public static Article getArticle(String articleId){
 		return articleService.get(articleId);
 	}
-	
+
 	/**
 	 * 获取文章列表
 	 * @param siteId 站点编号
@@ -154,11 +155,12 @@ public class CmsUtils {
 	 * @return
 	 * ${fnc:getArticleList(category.site.id, category.id, not empty pageSize?pageSize:8, 'posid:2, orderBy: \"hits desc\"')}"
 	 */
-	public static List<Article> getArticleList(String siteId, String categoryId, int number, String param){
-		Page<Article> page = new Page<Article>(1, number, -1);
+	public static List<ArticleVo> getArticleList(String siteId, String categoryId, int number, String param){
+		Page<ArticleVo> page = new Page<ArticleVo>(1, number, -1);
 		Category category = new Category(categoryId, new Site(siteId));
 		category.setParentIds(categoryId);
-		Article article = new Article(category);
+		ArticleVo article = new ArticleVo();
+		article.setCategory(category);
 		if (StringUtils.isNotBlank(param)){
 			@SuppressWarnings({ "rawtypes" })
 			Map map = JsonMapper.getInstance().fromJson("{"+param+"}", Map.class);
@@ -176,7 +178,7 @@ public class CmsUtils {
 		page = articleService.findPage(page, article, false);
 		return page.getList();
 	}
-	
+
 	/**
 	 * 获取链接
 	 * @param linkId 文章编号
@@ -185,7 +187,7 @@ public class CmsUtils {
 	public static Link getLink(String linkId){
 		return linkService.get(linkId);
 	}
-	
+
 	/**
 	 * 获取链接列表
 	 * @param siteId 站点编号
@@ -205,9 +207,9 @@ public class CmsUtils {
 		page = linkService.findPage(page, link, false);
 		return page.getList();
 	}
-	
+
 	// ============== Cms Cache ==============
-	
+
 	public static Object getCache(String key) {
 		return CacheUtils.get(CMS_CACHE, key);
 	}
@@ -281,7 +283,7 @@ public class CmsUtils {
             return context.getContextPath()+src;
         }
     }
-    
+
     public static void addViewConfigAttribute(Model model, String param){
         if(StringUtils.isNotBlank(param)){
             @SuppressWarnings("rawtypes")

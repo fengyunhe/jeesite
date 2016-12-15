@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.thinkgem.jeesite.modules.cms.vo.ArticleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,7 +46,7 @@ import com.thinkgem.jeesite.modules.cms.utils.CmsUtils;
 @Controller
 @RequestMapping(value = "${frontPath}")
 public class FrontController extends BaseController{
-	
+
 	@Autowired
 	private ArticleService articleService;
 	@Autowired
@@ -58,7 +59,7 @@ public class FrontController extends BaseController{
 	private CategoryService categoryService;
 	@Autowired
 	private SiteService siteService;
-	
+
 	/**
 	 * 网站首页
 	 */
@@ -69,7 +70,7 @@ public class FrontController extends BaseController{
 		model.addAttribute("isIndex", true);
 		return "modules/cms/front/themes/"+site.getTheme()+"/frontIndex";
 	}
-	
+
 	/**
 	 * 网站首页
 	 */
@@ -95,7 +96,7 @@ public class FrontController extends BaseController{
 			return "modules/cms/front/themes/"+site.getTheme()+"/frontListCategory";
 		}
 	}
-	
+
 	/**
 	 * 内容列表
 	 */
@@ -122,8 +123,9 @@ public class FrontController extends BaseController{
 			model.addAttribute("category", category);
 			model.addAttribute("categoryList", categoryList);
 			// 获取文章内容
-			Page<Article> page = new Page<Article>(1, 1, -1);
-			Article article = new Article(category);
+			Page<ArticleVo> page = new Page<ArticleVo>(1, 1, -1);
+			ArticleVo article = new ArticleVo();
+			article.setCategory(category);
 			page = articleService.findPage(page, article, false);
 			if (page.getList().size()>0){
 				article = page.getList().get(0);
@@ -153,9 +155,11 @@ public class FrontController extends BaseController{
 				model.addAttribute("categoryList", categoryList);
 				// 获取内容列表
 				if ("article".equals(category.getModule())){
-					Page<Article> page = new Page<Article>(pageNo, pageSize);
+					Page<ArticleVo> page = new Page<ArticleVo>(pageNo, pageSize);
 					//System.out.println(page.getPageNo());
-					page = articleService.findPage(page, new Article(category), false);
+					ArticleVo article1 = new ArticleVo();
+					article1.setCategory(category);
+					page = articleService.findPage(page, article1, false);
 					model.addAttribute("page", page);
 					// 如果第一个子栏目为简介类栏目，则获取该栏目第一篇文章
 					if ("2".equals(category.getShowModes())){
@@ -254,7 +258,7 @@ public class FrontController extends BaseController{
 			model.addAttribute("categoryList", categoryList);
 			article.setArticleData(articleDataService.get(article.getId()));
 			model.addAttribute("article", article);
-			model.addAttribute("relationList", relationList); 
+			model.addAttribute("relationList", relationList);
             CmsUtils.addViewConfigAttribute(model, article.getCategory());
             CmsUtils.addViewConfigAttribute(model, article.getViewConfig());
             Site site = siteService.get(category.getSite().getId());
@@ -264,7 +268,7 @@ public class FrontController extends BaseController{
 		}
 		return "error/404";
 	}
-	
+
 	/**
 	 * 内容评论
 	 */
@@ -280,7 +284,7 @@ public class FrontController extends BaseController{
 		model.addAttribute("comment", comment);
 		return "modules/cms/front/themes/"+theme+"/frontComment";
 	}
-	
+
 	/**
 	 * 内容评论保存
 	 */
@@ -308,7 +312,7 @@ public class FrontController extends BaseController{
 			return "{result:2, message:'验证码不能为空。'}";
 		}
 	}
-	
+
 	/**
 	 * 站点地图
 	 */
@@ -339,5 +343,5 @@ public class FrontController extends BaseController{
             return article.getCustomContentView();
         }
     }
-	
+
 }

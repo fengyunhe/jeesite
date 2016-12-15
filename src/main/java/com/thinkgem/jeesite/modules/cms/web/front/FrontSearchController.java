@@ -7,6 +7,7 @@ package com.thinkgem.jeesite.modules.cms.web.front;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.thinkgem.jeesite.modules.cms.vo.ArticleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.common.web.BaseController;
-import com.thinkgem.jeesite.modules.cms.entity.Article;
 import com.thinkgem.jeesite.modules.cms.entity.Guestbook;
 import com.thinkgem.jeesite.modules.cms.entity.Site;
 import com.thinkgem.jeesite.modules.cms.service.ArticleService;
@@ -32,23 +32,23 @@ import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 @Controller
 @RequestMapping(value = "${frontPath}/search")
 public class FrontSearchController extends BaseController{
-	
+
 	@Autowired
 	private ArticleService articleService;
 	@Autowired
 	private GuestbookService guestbookService;
-	
+
 	/**
 	 * 全站搜索
 	 */
 	@RequestMapping(value = "")
-	public String search(String t, @RequestParam(required=false) String q, @RequestParam(required=false) String qand, @RequestParam(required=false) String qnot, 
+	public String search(String t, @RequestParam(required=false) String q, @RequestParam(required=false) String qand, @RequestParam(required=false) String qnot,
 			@RequestParam(required=false) String a, @RequestParam(required=false) String cid, @RequestParam(required=false) String bd,
 			@RequestParam(required=false) String ed, HttpServletRequest request, HttpServletResponse response, Model model) {
 		long start = System.currentTimeMillis();
 		Site site = CmsUtils.getSite(Site.defaultSiteId());
 		model.addAttribute("site", site);
-		
+
 		// 重建索引（需要超级管理员权限）
 		if ("cmd:reindex".equals(q)){
 			if (UserUtils.getUser().isAdmin()){
@@ -71,15 +71,15 @@ public class FrontSearchController extends BaseController{
 			// 如果是高级搜索
 			if ("1".equals(a)){
 				if (StringUtils.isNotBlank(qand)){
-					qStr += " +" + StringUtils.replace(StringUtils.replace(StringUtils.replace(qand, "，", " "), ", ", " "), " ", " +"); 
+					qStr += " +" + StringUtils.replace(StringUtils.replace(StringUtils.replace(qand, "，", " "), ", ", " "), " ", " +");
 				}
 				if (StringUtils.isNotBlank(qnot)){
-					qStr += " -" + StringUtils.replace(StringUtils.replace(StringUtils.replace(qnot, "，", " "), ", ", " "), " ", " -"); 
+					qStr += " -" + StringUtils.replace(StringUtils.replace(StringUtils.replace(qnot, "，", " "), ", ", " "), " ", " -");
 				}
 			}
 			// 文章检索
 			if (StringUtils.isBlank(t) || "article".equals(t)){
-				Page<Article> page = articleService.search(new Page<Article>(request, response), qStr, cid, bd, ed);
+				Page<ArticleVo> page = articleService.search(new Page<ArticleVo>(request, response), qStr, cid, bd, ed);
 				page.setMessage("匹配结果，共耗时 " + (System.currentTimeMillis() - start) + "毫秒。");
 				model.addAttribute("page", page);
 			}
@@ -89,7 +89,7 @@ public class FrontSearchController extends BaseController{
 				page.setMessage("匹配结果，共耗时 " + (System.currentTimeMillis() - start) + "毫秒。");
 				model.addAttribute("page", page);
 			}
-			
+
 		}
 		model.addAttribute("t", t);// 搜索类型
 		model.addAttribute("q", q);// 搜索关键字
@@ -98,5 +98,5 @@ public class FrontSearchController extends BaseController{
 		model.addAttribute("cid", cid);// 搜索类型
 		return "modules/cms/front/themes/"+site.getTheme()+"/frontSearch";
 	}
-	
+
 }

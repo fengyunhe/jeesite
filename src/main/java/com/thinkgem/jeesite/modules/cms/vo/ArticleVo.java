@@ -1,4 +1,4 @@
-package com.thinkgem.jeesite.modules.cms;
+package com.thinkgem.jeesite.modules.cms.vo;
 
 import com.thinkgem.jeesite.modules.cms.entity.Article;
 

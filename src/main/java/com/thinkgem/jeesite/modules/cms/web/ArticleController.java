@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.thinkgem.jeesite.modules.cms.vo.ArticleVo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -53,7 +54,7 @@ public class ArticleController extends BaseController {
    	private FileTplService fileTplService;
     @Autowired
    	private SiteService siteService;
-	
+
 	@ModelAttribute
 	public Article get(@RequestParam(required=false) String id) {
 		if (StringUtils.isNotBlank(id)){
@@ -62,10 +63,10 @@ public class ArticleController extends BaseController {
 			return new Article();
 		}
 	}
-	
+
 	@RequiresPermissions("cms:article:view")
 	@RequestMapping(value = {"list", ""})
-	public String list(Article article, HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String list(ArticleVo article, HttpServletRequest request, HttpServletResponse response, Model model) {
 //		for (int i=0; i<10000000; i++){
 //			Article a = new Article();
 //			a.setCategory(new Category(article.getCategory().getId()));
@@ -74,7 +75,7 @@ public class ArticleController extends BaseController {
 //			a.getArticleData().setContent(a.getTitle());
 //			articleService.save(a);
 //		}
-        Page<Article> page = articleService.findPage(new Page<Article>(request, response), article, true); 
+        Page<ArticleVo> page = articleService.findPage(new Page(request, response), article, true);
         model.addAttribute("page", page);
 		return "modules/cms/articleList";
 	}
@@ -113,7 +114,7 @@ public class ArticleController extends BaseController {
 		String categoryId = article.getCategory()!=null?article.getCategory().getId():null;
 		return "redirect:" + adminPath + "/cms/article/?repage&category.id="+(categoryId!=null?categoryId:"");
 	}
-	
+
 	@RequiresPermissions("cms:article:edit")
 	@RequestMapping(value = "delete")
 	public String delete(Article article, String categoryId, @RequestParam(required=false) Boolean isRe, RedirectAttributes redirectAttributes) {
@@ -131,11 +132,11 @@ public class ArticleController extends BaseController {
 	 */
 	@RequiresPermissions("cms:article:view")
 	@RequestMapping(value = "selectList")
-	public String selectList(Article article, HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String selectList(ArticleVo article, HttpServletRequest request, HttpServletResponse response, Model model) {
         list(article, request, response, model);
 		return "modules/cms/articleSelectList";
 	}
-	
+
 	/**
 	 * 通过编号获取文章标题
 	 */
