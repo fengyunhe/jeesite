@@ -39,7 +39,7 @@ public class ${ClassName}Controller extends BaseController {
 
 	@Autowired
 	private ${ClassName}Service ${className}Service;
-	
+
 	@ModelAttribute
 	public ${ClassName}Vo get(@RequestParam(required=false) String id) {
 		${ClassName}Vo entity = null;
@@ -51,7 +51,7 @@ public class ${ClassName}Controller extends BaseController {
 		}
 		return entity;
 	}
-	
+
 	@RequiresPermissions("${permissionPrefix}:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(${ClassName}Vo ${className}Vo, HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -84,7 +84,7 @@ public class ${ClassName}Controller extends BaseController {
 		addMessage(redirectAttributes, "保存${functionNameSimple}成功");
 		return "redirect:"+Global.getAdminPath()+"/${viewPrefix}/?repage";
 	}
-	
+
 	@RequiresPermissions("${permissionPrefix}:edit")
 	@RequestMapping(value = "delete")
 	public String delete(${ClassName}Vo ${className}Vo, RedirectAttributes redirectAttributes) {
