@@ -2,19 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<groupId>com.thinkgem.jeesite</groupId>
 	<artifactId>jeesite</artifactId>
 	<version>1.2.7</version>
 	<packaging>war</packaging>
-	
-	<name>JeeSite</name>
-	<url>http://thinkgem.github.com/jeesite</url>
-	<inceptionYear>2012-2016</inceptionYear>
-	
+
+	<name>Firegod School</name>
+	<url>https://fengyunhe.github.io/school/</url>
+	<inceptionYear>2016</inceptionYear>
+
 	<!-- 项目属性 -->
 	<properties>
-		
+
 		<!-- main version setting -->
 		<spring.version>4.1.9.RELEASE</spring.version>
 		<validator.version>5.2.4.Final</validator.version>
@@ -26,7 +26,7 @@
 		<shiro.version>1.2.3</shiro.version>
 		<sitemesh.version>2.4.2</sitemesh.version>
 		<activiti.version>5.21.0</activiti.version>
-		
+
 		<!-- tools version setting -->
 		<slf4j.version>1.7.7</slf4j.version>
 		<commons-lang3.version>3.3.2</commons-lang3.version>
@@ -41,12 +41,12 @@
 		<dozer.version>5.5.1</dozer.version>
 		<poi.version>3.9</poi.version>
 		<freemarker.version>2.3.23</freemarker.version>
-		
+
 		<!-- jdbc driver setting -->
 		<mysql.driver.version>5.1.30</mysql.driver.version>
 		<oracle.driver.version>10.2.0.4.0</oracle.driver.version>
 		<mssql.driver.version>1.3.1</mssql.driver.version>
-	    
+
 		<!-- environment setting -->
 		<jdk.version>1.6</jdk.version>
 		<tomcat.version>2.2</tomcat.version>
@@ -54,34 +54,34 @@
 		<webserver.port>8181</webserver.port>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<downloadSources>true</downloadSources>
-		
+
 	</properties>
-	
+
 	<!-- 设定主仓库，按设定顺序进行查找。 -->
 	<repositories>
-	
+
 		<repository>
 			<id>jeesite-repos</id>
 			<name>Jeesite Repository</name>
 			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
 		</repository>
-		
+
 	</repositories>
-	
+
 	<!-- 设定插件仓库 -->
-	<pluginRepositories> 
-	
+	<pluginRepositories>
+
 		<pluginRepository>
 			<id>jeesite-repos</id>
 			<name>Jeesite Repository</name>
 			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
 		</pluginRepository>
-		
-	</pluginRepositories> 
-	
+
+	</pluginRepositories>
+
 	<!-- 依赖项定义 -->
 	<dependencies>
-	
+
 		<!-- SPRING begin -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -125,7 +125,7 @@
 			<artifactId>spring-tx</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-			
+
 		<!-- spring orm -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -137,7 +137,7 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
+
 		<!-- bean validate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -145,7 +145,7 @@
 			<version>${validator.version}</version>
 		</dependency>
 		<!-- SPRING end -->
-		
+
 		<!-- AOP begin -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -163,9 +163,9 @@
 			<version>3.1</version>
 		</dependency>
 		<!-- AOP end -->
-		
+
 		<!-- PERSISTENCE begin -->
-		
+
 		<!-- MyBatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -177,14 +177,14 @@
 			<artifactId>mybatis-spring</artifactId>
 			<version>${mybatis-spring.version}</version>
 		</dependency>
-		
+
 		<!-- connection pool -->
 		<dependency>
 		     <groupId>com.alibaba</groupId>
 		     <artifactId>druid</artifactId>
 		     <version>${druid.version}</version>
 		</dependency>
-		
+
 		<!-- jdbc driver -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -206,7 +206,7 @@
 			<scope>runtime</scope>
 		</dependency>
 		<!-- PERSISTENCE end -->
-		
+
 		<!-- WEB begin -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -273,8 +273,8 @@
 			<version>${ehcache.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>net.sf.ehcache</groupId>  
-			<artifactId>ehcache-web</artifactId>  
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-web</artifactId>
 			<version>${ehcache-web.version}</version>
 		</dependency>
 		<dependency>
@@ -283,7 +283,7 @@
 			 <version>2.5.1</version>
 		</dependency>
 		<!-- CACHE end -->
-		
+
 		<!-- SECURITY begin -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
@@ -317,7 +317,7 @@
 			<version>${shiro.version}</version>
 		</dependency>
 		<!-- SECURITY end -->
-		
+
 		<!-- Activiti -->
 		<dependency>
 			<groupId>org.activiti</groupId>
@@ -358,14 +358,14 @@
 			<artifactId>activiti-diagram-rest</artifactId>
 			<version>${activiti.version}</version>
 		</dependency>
-		
+
 		<!-- 支持activiti缓存 -->
 		<!-- <dependency>
 			<groupId>org.infinispan</groupId>
 			<artifactId>infinispan-core</artifactId>
 			<version>5.1.7.Final</version>
 		</dependency> -->
-		
+
 		<!-- LOGGING begin -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -390,7 +390,7 @@
 			<version>${slf4j.version}</version>
 		</dependency>
 		<!-- LOGGING end -->
-		
+
 		<!-- GENERAL UTILS begin -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -423,14 +423,14 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<!-- google java lib -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>${guava.version}</version>
 		</dependency>
-		
+
 		<!-- jackson json -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -452,35 +452,35 @@
 			<artifactId>jackson-module-jaxb-annotations</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
-		
+
 		<!-- fastjson json
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>${fastjson.version}</version>
 		</dependency> -->
-		
+
 		<!-- xstream xml -->
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
 			<version>${xstream.version}</version>
 		</dependency>
-		
+
 		<!-- pojo copy -->
 		<dependency>
 			<groupId>net.sf.dozer</groupId>
 			<artifactId>dozer</artifactId>
 			<version>${dozer.version}</version>
 		</dependency>
-		
+
 		<!-- freemarker engine -->
 		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
 			<version>${freemarker.version}</version>
 		</dependency>
-		
+
 		<!-- email -->
 		<dependency>
 			<groupId>javax.mail</groupId>
@@ -492,7 +492,7 @@
 			<artifactId>activation</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-		
+
 		<!-- poi office -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
@@ -509,14 +509,14 @@
 			<artifactId>poi-ooxml-schemas</artifactId>
 			<version>${poi.version}</version>
 		</dependency>
-		
+
 		<!-- image util -->
 		<dependency>
 			<groupId>com.drewnoakes</groupId>
 			<artifactId>metadata-extractor</artifactId>
 			<version>2.6.2</version>
 		</dependency>
-		
+
 		<!-- 条形码、二维码生成  -->
 		<dependency>
 			<groupId>com.google.zxing</groupId>
@@ -528,7 +528,7 @@
 			<artifactId>javase</artifactId>
 			<version>2.2</version>
 		</dependency>
-		
+
 		<!-- 中文分词 -->
 		<dependency>
 			<groupId>org.wltea</groupId>
@@ -538,7 +538,7 @@
 			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/analyzer-2012_u6.jar</systemPath>
 		</dependency>
 		<!-- GENERAL UTILS end -->
-		
+
 		<!-- CKFinder begin -->
 		<dependency>
 			<groupId>net.coobird</groupId>
@@ -576,7 +576,7 @@
 			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/ckfinderplugin-imageresize-2.3.jar</systemPath>
 		</dependency>
 		<!-- CKFinder end -->
-		
+
 		<!-- TEST begin -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -589,7 +589,7 @@
 			<version>${spring.version}</version>
 		</dependency>
 		<!-- TEST end -->
-		
+
 		<!-- User Agent -->
 		<dependency>
 			<groupId>bitwalker</groupId>
@@ -598,7 +598,7 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/UserAgentUtils-1.13.jar</systemPath>
 		</dependency>
-		
+
 		<!-- 自定义jar依赖包
 		<dependency>
 			<groupId>com.thinkgem.jeesite</groupId>
@@ -607,8 +607,8 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/test-core-1.0.jar</systemPath>
 		</dependency> -->
-		
-		<!-- 使用 Jetty JSP引擎 
+
+		<!-- 使用 Jetty JSP引擎
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-jsp</artifactId>
@@ -624,7 +624,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency> -->
-		
+
 	</dependencies>
 
 	<build>
@@ -641,7 +641,7 @@
 					<showWarnings>true</showWarnings>
 				</configuration>
 			</plugin>
-			
+
 			<!-- JSP 预编译插件  jspweb.xml
 			<plugin>
 				<groupId>org.jasig.mojo.jspc</groupId>
@@ -665,7 +665,7 @@
 					</dependency>
 				</dependencies>
 			</plugin>-->
-			
+
 			<!-- Jetty JSP 预编译插件  web.xml
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
@@ -682,7 +682,7 @@
 					</execution>
 				</executions>
 			</plugin>-->
-			
+
 			<!-- 打包jar文件时，配置manifest文件，加入lib包的jar依赖 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -708,7 +708,7 @@
 					</execution>
 				</executions> -->
 			</plugin>
-			
+
 			<!-- 混淆代码
 			<plugin>
 				<groupId>com.github.wvengen</groupId>
@@ -779,12 +779,12 @@
 						<!-- userfiles/** --><!-- ,/**/*.jsp -->,
 						test/**
 					</warSourceExcludes>
-					<webappDirectory>${project.build.directory}/${project.artifactId}</webappDirectory><!-- 
+					<webappDirectory>${project.build.directory}/${project.artifactId}</webappDirectory><!--
 					<webXml>${project.basedir}/target/jspweb.xml</webXml> -->
 					<warName>${project.artifactId}</warName>
 				</configuration>
 			</plugin>
-			
+
 			<!-- Eclipse 插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -809,37 +809,39 @@
 					</additionalProjectnatures>
 				</configuration>
 			</plugin>
-			
+
 			<!-- tomcat6插件 -->
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat6-maven-plugin</artifactId>
-				<version>${tomcat.version}</version> 
+				<version>${tomcat.version}</version>
 				<configuration>
 					<port>${webserver.port}</port>
 					<path>/${project.artifactId}</path>
 					<uriEncoding>${project.build.sourceEncoding}</uriEncoding>
 				</configuration>
 			</plugin>
-			
+
 			<!-- tomcat7插件 -->
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>${tomcat.version}</version> 
+				<version>${tomcat.version}</version>
 				<configuration>
 					<port>${webserver.port}</port>
 					<path>/${project.artifactId}</path>
 					<uriEncoding>${project.build.sourceEncoding}</uriEncoding>
 				</configuration>
 			</plugin>
-			
+
 			<!-- jetty插件 -->
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>${jetty.version}</version>
 				<configuration>
+					<stopKey>yangyan</stopKey>
+					<stopPort>2222</stopPort>
 					<connectors>
 						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
 							<port>${webserver.port}</port>
@@ -848,43 +850,44 @@
 					<webAppConfig>
 						<contextPath>/${project.artifactId}</contextPath>
 					</webAppConfig>
-					<systemProperties>  
+					<systemProperties>
 						<systemProperty>
 							<name>org.mortbay.util.URI.charset</name>
 							<value>${project.build.sourceEncoding}</value>
 						</systemProperty>
 					</systemProperties>
+
 				</configuration>
 			</plugin>
-			
+
 			<!-- resource插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>2.7</version>
 			</plugin>
-			
+
 			<!-- install插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-install-plugin</artifactId>
 				<version>2.5.2</version>
 			</plugin>
-			
+
 			<!-- clean插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>2.6.1</version>
 			</plugin>
-			
+
 			<!-- ant插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<version>1.8</version>
 			</plugin>
-			
+
 			<!-- dependency插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -893,9 +896,9 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<profiles>
-		<!-- 初始化数据库 -->			
+		<!-- 初始化数据库 -->
 		<profile>
 			<id>init-db</id>
 			<dependencies>
@@ -918,18 +921,18 @@
 						<version>1.7</version>
 						<configuration>
 							<target>
-								
+
 								<!-- mysql -->
 								<property name="dbunit.datatype" value="org.dbunit.ext.mysql.MySqlDataTypeFactory" />
-								
+
 								<!-- mssql
 								<property name="dbunit.datatype" value="org.dbunit.ext.mssql.MsSqlDataTypeFactory" /> -->
-								
+
 								<!-- oracle
 								<property name="dbunit.datatype" value="org.dbunit.ext.oracle.Oracle10DataTypeFactory" /> -->
-								
+
 								<property file="src/main/resources/jeesite.properties" />
-								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}" 
+								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}"
 									onerror="continue" encoding="${project.build.sourceEncoding}">
 									<classpath refid="maven.test.classpath" />
 									<transaction src="db/sys/jeesite_${jdbc.type}.sql"/>
@@ -945,26 +948,26 @@
 									<transaction src="db/act/create/activiti.${jdbc.type}.create.history.sql"/>
 									<transaction src="db/act/create/activiti.${jdbc.type}.create.identity.sql"/>
 								</sql>
-								
+
 								<taskdef name="dbunit" classname="org.dbunit.ant.DbUnitTask" classpathref="maven.test.classpath" />
-								
+
 								<!-- mysql、mssql -->
 								<dbunit driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}"
 									 password="${jdbc.password}">
-								
+
 								<!-- oracle
 								<dbunit driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}"
 									password="${jdbc.password}" schema="${jdbc.username}" > -->
-									
+
 									<dbconfig>
 										<property name="datatypeFactory" value="${dbunit.datatype}" />
 									</dbconfig>
 									<classpath refid="maven.test.classpath" />
 									<operation type="INSERT" src="db/sys/jeesite_data.xls" format="xls" transaction="true"/>
 									<operation type="INSERT" src="db/cms/jeesite_data.xls" format="xls" transaction="true"/>
-									
+
 								</dbunit>
-								
+
 							</target>
 						</configuration>
 					</plugin>
@@ -972,9 +975,9 @@
 			</build>
 		</profile>
 	</profiles>
-	
+
 	<!-- 开发者信息 -->
-	<developers>  
+	<developers>
 		<developer>
 			<id>thinkgem</id>
 			<name>WangZhen</name>
@@ -983,12 +986,12 @@
 			<timezone>+8</timezone>
 		</developer>
 		<developer>
-			<id>fengyunhe</id>
-			<name>Yangyan</name>
+			<id>firegod</id>
+			<name>Firegod</name>
 			<email>277160299@qq.com</email>
 			<roles><role>Developer</role></roles>
 			<timezone>+8</timezone>
 		</developer>
 	</developers>
-	
+
 </project>
