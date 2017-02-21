@@ -130,7 +130,7 @@ public class ActProcessService extends BaseService {
 	 * @return
 	 */
 	@Transactional(readOnly = false)
-	public String deploy(String exportDir, String category, MultipartFile file) {
+	public String deploy(String category, MultipartFile file) {
 
 		String message = "";
 		

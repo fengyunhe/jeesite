@@ -15,6 +15,8 @@
 	<!-- 项目属性 -->
 	<properties>
 
+		<logdir>/var/log/tomcat</logdir>
+
 		<!-- main version setting -->
 		<spring.version>4.1.9.RELEASE</spring.version>
 		<validator.version>5.2.4.Final</validator.version>
@@ -895,7 +897,20 @@
 				<version>2.10</version>
 			</plugin>
 		</plugins>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>*.properties</include>
+					<include>*.xml</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
+
+
 
 	<profiles>
 		<!-- 初始化数据库 -->
